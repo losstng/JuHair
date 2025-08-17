@@ -1,0 +1,20 @@
+---
+interface PriceItem {
+  name: string;
+  price: string;
+}
+export interface Props {
+  items: PriceItem[];
+}
+const { items } = Astro.props as Props;
+---
+<table>
+  <tbody>
+    {items.map((item) => (
+      <tr>
+        <td>{item.name}</td>
+        <td>{item.price}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "jsx": "preserve",
+    "jsxImportSource": "preact",
+    "types": ["astro/client"],
+    "baseUrl": "."
+  },
+  "include": ["src", "i18n", "content"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Default.astro';
+import Footer from '../../components/Footer.astro';
+import LanguageToggle from '../../components/LanguageToggle.tsx';
+import { ui } from '../../i18n';
+const lang = 'en';
+---
+<Layout lang={lang} title="JuHair">
+  <header>
+    <LanguageToggle client:load lang={lang} />
+  </header>
+  <main>
+    <h1>JuHair</h1>
+    <p>{ui[lang].book}</p>
+  </main>
+  <Footer lang={lang} hotline="+84 123456789" address="123 Street, Hanoi" bookingUrl="#" />
+</Layout>

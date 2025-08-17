@@ -1,0 +1,16 @@
+---
+import type { Lang } from '../../i18n';
+import { ui } from '../../i18n';
+export interface Props {
+  lang: Lang;
+  hotline: string;
+  address: string;
+  bookingUrl: string;
+}
+const { lang, hotline, address, bookingUrl } = Astro.props as Props;
+---
+<footer>
+  <p><a href={`tel:${hotline}`}>{hotline}</a></p>
+  <p><a href="https://maps.google.com" target="_blank" rel="noopener">{address}</a></p>
+  <p><a href={bookingUrl}>{ui[lang].book}</a></p>
+</footer>
