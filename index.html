@@ -3,16 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Salon — Bilingual Starter</title>
+  <title>Ju Hair Salon</title>
   <!-- Bootstrap 5 (no build) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
   <style>
     /* Minimal custom styles */
-    :root { --brand: #111827; --accent: #e11d48; }
+    :root { --brand: #111827; --accent: #e11d48; --nav-bg:#ece2d1; }
+    .nav-cream{ background: var(--nav-bg); border-bottom:1px solid rgba(0,0,0,.08); }
+    .navbar-brand{ text-transform: uppercase; letter-spacing:.35em; font-weight:700; font-size: .95rem; line-height:1.1; }
+    .navbar-nav .nav-link{ color:#111; padding:.75rem 1rem; }
+    .navbar-nav .nav-link:hover{ color:#000; }
+    .navbar-nav .nav-link.active{ font-weight:600; color:#111 !important; border-bottom:3px solid currentColor; border-radius:0; }
     .brand-gradient { background: linear-gradient(135deg, #111827 0%, #0f172a 50%, #111827 100%); }
-    .nav-link.active { font-weight: 600; color: var(--accent) !important; }
     .hero { color: #fff; padding: 6rem 0; }
     .section { padding: 4rem 0; }
     .gallery-img{ width:100%; height:220px; object-fit:cover; border-radius:.5rem; }
@@ -21,61 +25,113 @@
     .price-img { max-width: 100%; border-radius: .5rem; box-shadow: 0 10px 25px rgba(0,0,0,.08); }
     footer a { text-decoration: none; }
     .lang-toggle .btn{ padding: .25rem .6rem; }
+
+    /* New hero style to match screenshot layout */
+    .hero-visual{ position:relative; min-height:72vh; background-size:cover; background-position:center; }
+    .hero-visual::before{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,.45), rgba(0,0,0,.25)); }
+    .hero-copy{ position:relative; color:#fff; padding: 7rem 0; max-width: 780px; }
+    .hero-eyebrow{ text-transform:uppercase; letter-spacing:.25em; opacity:.95; font-weight:600; }
+    .hero-title{ text-transform:uppercase; letter-spacing:.04em; font-weight:800; line-height:1.05; font-size:clamp(2.5rem,6vw,4.5rem); }
+    .hero-kicker{ text-transform:uppercase; letter-spacing:.6em; font-weight:600; margin-top:.25rem; }
+    .hero-address{ text-transform:uppercase; font-weight:700; margin-top:1.5rem; }
+      .hero-separator{ height:56px; background:#000; width:100%; }
+      /* Brand partners carousel */
+    .band-black{background:#0b0b0b;color:#fff;text-align:center;padding:.85rem 0;text-transform:uppercase;letter-spacing:.08em;font-weight:800;}
+    .brand-carousel .carousel-item{height:420px;}
+    @media (max-width: 768px){ .brand-carousel .carousel-item{height:280px;} }
+    .brand-carousel .carousel-item img{width:100%;height:100%;object-fit:cover;}
+    .brand-carousel .carousel-indicators [data-bs-target]{background-color:#fff;opacity:.5;}
+    .brand-carousel .carousel-indicators .active{opacity:1;}
+    .brand-carousel .carousel-control-prev-icon,.brand-carousel .carousel-control-next-icon{filter:invert(1) grayscale(1);}  
+      /* Instagram feed grid */
+    .ig-section{background:#fff;}
+    .ig-handle{font-weight:800;text-transform:uppercase;letter-spacing:.08em;text-decoration:underline;color:inherit}
+    .ig-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
+    @media(max-width:1200px){.ig-grid{grid-template-columns:repeat(4,1fr)}}
+    @media(max-width:992px){.ig-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:576px){.ig-grid{grid-template-columns:repeat(2,1fr)}}
+    .ig-card{overflow:hidden;border-radius:.5rem}
+    .ig-card img{width:100%;height:100%;object-fit:cover;transition:transform .25s ease}
+    .ig-card:hover img{transform:scale(1.03)}
   </style>
 </head>
 <body data-language="en">
   <!-- Nav -->
-  <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top shadow-sm">
+  <nav class="navbar navbar-expand-lg nav-cream sticky-top shadow-sm">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="#home" data-i18n="brand">AURORA HAIR</a>
+      <a class="navbar-brand" href="#home" data-i18n="brand">JU HAIR SALON</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="nav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link" href="#home" data-i18n="nav.home">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#prices" data-i18n="nav.prices">Prices</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav.contact">Contact</a></li>
         </ul>
-        <div class="d-flex align-items-center gap-3">
-          <div class="lang-toggle btn-group" role="group" aria-label="Language toggle">
-            <button class="btn btn-outline-secondary btn-sm" id="lang-en">EN</button>
-            <button class="btn btn-outline-secondary btn-sm" id="lang-vi">VI</button>
-          </div>
-          <a href="#book" class="btn btn-accent text-white" data-bs-toggle="modal" data-bs-target="#bookingModal">
-            <i class="bi bi-calendar-check me-1"></i><span data-i18n="cta.book">Book</span>
-          </a>
+        <div class="dropdown ms-lg-0 ms-auto">
+          <button class="btn btn-outline-dark btn-sm dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span id="current-flag" class="fs-6">🇺🇸</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#" id="lang-en">🇺🇸 English</a></li>
+            <li><a class="dropdown-item" href="#" id="lang-vi">🇻🇳 Tiếng Việt</a></li>
+          </ul>
         </div>
       </div>
     </div>
   </nav>
 
   <!-- Hero / Home -->
-  <header id="home" class="brand-gradient hero">
+  <header id="home" class="hero-visual" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1600&auto=format&fit=crop');">
     <div class="container">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-7">
-          <h1 class="display-5 fw-bold" data-i18n="hero.title">Hair that matches your rhythm.</h1>
-          <p class="lead" data-i18n="hero.subtitle">Cut, color, and care — crafted with precision and heart, in District 1.</p>
-          <div class="d-flex gap-2 mt-3">
-            <a class="btn btn-accent text-white" data-bs-toggle="modal" data-bs-target="#bookingModal" href="#book"><i class="bi bi-calendar-event me-2"></i><span data-i18n="cta.bookFull">Book an appointment</span></a>
-            <a class="btn btn-outline-light" href="#prices"><i class="bi bi-cash-coin me-2"></i><span data-i18n="cta.viewPrices">View prices</span></a>
-          </div>
-        </div>
-        <div class="col-lg-5">
-          <div class="ratio ratio-1x1 rounded-4 overflow-hidden shadow">
-            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1320&auto=format&fit=crop" alt="Salon stylist at work" class="w-100 h-100 object-fit-cover" />
-          </div>
+      <div class="hero-copy">
+        <div class="hero-eyebrow" data-i18n="hero.eyebrow">Our Studio</div>
+        <h1 class="hero-title" data-i18n="hero.title">Behind the Chair</h1>
+        <div class="hero-kicker" data-i18n="hero.kicker">Hair Salon & Studio</div>
+        <p class="hero-address mb-0" data-i18n="hero.addr1">317 Lý Tự Trọng, Phường Bến Thành, Quận 1,</p>
+        <p class="hero-address" data-i18n="hero.addr2">Hồ Chí Minh, Vietnam</p>
+        <div class="d-flex gap-2 mt-3">
+          <a class="btn btn-accent text-white" data-bs-toggle="modal" data-bs-target="#bookingModal" href="#book"><i class="bi bi-calendar-event me-2"></i><span data-i18n="cta.bookFull">Book an appointment</span></a>
+          <a class="btn btn-outline-light" href="#prices"><i class="bi bi-cash-coin me-2"></i><span data-i18n="cta.viewPrices">View prices</span></a>
         </div>
       </div>
     </div>
   </header>
+
+  <!-- Black separator bar between hero and content -->
+  <div class="hero-separator"></div>
 
   <!-- Shared gallery (will be injected on every page section) -->
   <section class="section bg-light">
     <div class="container">
       <h2 class="h4 mb-3" data-i18n="gallery.title">Gallery</h2>
       <div class="row g-3 gallery-container" data-gallery-target="home"></div>
+    </div>
+  </section>
+
+  <!-- Brand partners -->
+  <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="brands.title">OUR TRUSTED BRAND PARTNERS</div></div></div>
+
+  <div id="brandCarousel" class="carousel slide brand-carousel" data-bs-ride="carousel" data-bs-interval="4000">
+    <div class="carousel-indicators" id="brand-indicators"></div>
+    <div class="carousel-inner" id="brand-slides"></div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#brandCarousel" data-bs-slide="prev" aria-label="Previous">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#brandCarousel" data-bs-slide="next" aria-label="Next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="social.follow">FOLLOW US AT INSTAGRAM!</div></div></div>
+
+  <!-- Instagram feed grid -->
+  <section id="instagram" class="section ig-section">
+    <div class="container text-center">
+      <a id="ig-handle-link" class="ig-handle d-inline-block" href="https://instagram.com/ju.hairsalon" target="_blank" rel="noopener">@JU.HAIRSALON</a>
+      <p class="text-muted mt-2" data-i18n="insta.subtitle">We regularly update our hairstyles and news on our official Instagram channel.</p>
+      <div id="ig-grid" class="ig-grid mt-3"></div>
     </div>
   </section>
 
@@ -136,11 +192,11 @@
           <h2 class="h3" data-i18n="contact.title">Find us</h2>
           <p class="text-muted" data-i18n="contact.subtitle">We are in the city center with easy parking.</p>
           <div class="d-flex flex-column gap-1">
-            <div><i class="bi bi-geo-alt me-2"></i><span id="address">123 Nguyễn Huệ, Quận 1, TP.HCM</span></div>
-            <div><i class="bi bi-telephone me-2"></i><a id="hotline" href="tel:+84000000000">(+84) 00 0000 0000</a></div>
+            <div><i class="bi bi-geo-alt me-2"></i><span id="address">317 Lý Tự Trọng, Phường Bến Thành, Quận 1, Hồ Chí Minh, Vietnam</span></div>
+            <div><i class="bi bi-telephone me-2"></i><a id="hotline" href="tel:0985678988">0985678988</a></div>
             <div class="d-flex gap-3">
-              <a id="map-link" class="link-primary" target="_blank" rel="noopener" href="https://maps.google.com/?q=123+Nguyen+Hue+Ho+Chi+Minh"><i class="bi bi-map me-1"></i><span data-i18n="contact.openMap">Open in Google Maps</span></a>
-              <a class="link-primary" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+              <a id="map-link" class="link-primary" target="_blank" rel="noopener" href="https://maps.google.com/?q=317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam"><i class="bi bi-map me-1"></i><span data-i18n="contact.openMap">Open in Google Maps</span></a>
+              <a id="facebook-link" class=\"link-primary\" href=\"https://www.facebook.com/juhair0923322333?mibextid=uzlsIk\" target=\"_blank\" rel=\"noopener\" aria-label=\"Facebook\"><i class="bi bi-facebook"></i></a>
               <a class="link-primary" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
               <a class="link-primary" href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
             </div>
@@ -149,7 +205,7 @@
         <div class="col-lg-6">
           <div class="ratio ratio-4x3 rounded-3 overflow-hidden shadow-sm">
             <!-- Replace src with your embed placeid -->
-            <iframe id="map-embed" src="https://www.google.com/maps?q=Nguyen+Hue+Ho+Chi+Minh&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe id="map-embed" src="https://www.google.com/maps?q=317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
@@ -168,11 +224,11 @@
   <footer class="py-4 border-top">
     <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
       <div class="small">
-        <span class="me-3"><i class="bi bi-telephone me-1"></i><a id="hotline-footer" href="tel:+84000000000">(+84) 00 0000 0000</a></span>
-        <span class="me-3"><i class="bi bi-geo-alt me-1"></i><span id="address-footer">123 Nguyễn Huệ, Quận 1, TP.HCM</span></span>
-        <a id="map-footer" class="me-2" target="_blank" rel="noopener" href="https://maps.google.com/?q=123+Nguyen+Hue+Ho+Chi+Minh"><i class="bi bi-map"></i> <span data-i18n="contact.openMap">Open in Google Maps</span></a>
+        <span class="me-3"><i class="bi bi-telephone me-1"></i><a id="hotline-footer" href="tel:0985678988">0985678988</a></span>
+        <span class="me-3"><i class="bi bi-geo-alt me-1"></i><span id="address-footer">317 Lý Tự Trọng, Phường Bến Thành, Quận 1, Hồ Chí Minh, Vietnam</span></span>
+        <a id="map-footer" class="me-2" target="_blank" rel="noopener" href="https://maps.google.com/?q=317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam"><i class="bi bi-map"></i> <span data-i18n="contact.openMap">Open in Google Maps</span></a>
       </div>
-      <div class="small">© <span id="year"></span> <span data-i18n="brand">AURORA HAIR</span></div>
+      <div class="small">© <span id="year"></span> <span data-i18n="brand">JU HAIR SALON</span></div>
     </div>
   </footer>
 
@@ -220,7 +276,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <a id="call-hotline" href="tel:+84000000000" class="me-auto"><i class="bi bi-telephone me-1"></i><span data-i18n="booking.call">Call hotline</span></a>
+          <a id="call-hotline" href="tel:0985678988" class="me-auto"><i class="bi bi-telephone me-1"></i><span data-i18n="booking.call">Call hotline</span></a>
           <button class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="booking.cancel">Cancel</button>
           <button id="submit-booking" class="btn btn-accent text-white" data-i18n="booking.submit">Send request</button>
         </div>
@@ -234,10 +290,11 @@
     const CONFIG = {
       LANGUAGE_DEFAULT: 'en', // 'en' or 'vi'
       USE_PRICE_IMAGE: false,  // true => show image instead of table
-      HOTLINE: '+84 90 123 4567',
-      ADDRESS: '123 Nguyễn Huệ, Quận 1, TP.HCM',
-      MAP_QUERY: '123+Nguyen+Hue+Ho+Chi+Minh',
+      HOTLINE: '0985678988',
+      ADDRESS: '317 Lý Tự Trọng, Phường Bến Thành, Quận 1, Hồ Chí Minh, Vietnam',
+      MAP_QUERY: '317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam',
       BOOKING_EMAIL: 'booking@example.com', // used for mailto fallback
+      FACEBOOK_URL: 'https://www.facebook.com/juhair0923322333?mibextid=uzlsIk',
     };
 
     // ====== SAMPLE CONTENT DATA ======
@@ -250,6 +307,32 @@
       'https://images.unsplash.com/photo-1516880711640-ef7db81be3e6?q=80&w=1200&auto=format&fit=crop'
     ];
 
+    const BRANDS = [
+      // Replace these with your brand/partner images (1200x600 recommended)
+      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1600&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1510414696678-2415ad8474aa?q=80&w=1600&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=1600&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1516880711640-ef7db81be3e6?q=80&w=1600&auto=format&fit=crop'
+    ];
+
+    const INSTAGRAM = { HANDLE: 'ju.hairsalon', URL: 'https://instagram.com/ju.hairsalon' };
+
+    const INSTAGRAM_POSTS = [
+      { href: 'https://www.instagram.com/p/POST1/', src: 'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?q=80&w=800&auto=format&fit=crop' },
+      { href: 'https://www.instagram.com/p/POST2/', src: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop' },
+      { href: 'https://www.instagram.com/p/POST3/', src: 'https://images.unsplash.com/photo-1510414696678-2415ad8474aa?q=80&w=800&auto=format&fit=crop' },
+      { href: 'https://www.instagram.com/p/POST4/', src: 'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=800&auto=format&fit=crop' },
+      { href: 'https://www.instagram.com/p/POST5/', src: 'https://images.unsplash.com/photo-1516880711640-ef7db81be3e6?q=80&w=800&auto=format&fit=crop' },
+      { href: 'https://www.instagram.com/p/POST6/', src: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop' },
+      { href: 'https://www.instagram.com/p/POST7/', src: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop' },
+      { href: 'https://www.instagram.com/p/POST8/', src: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop' },
+      { href: 'https://www.instagram.com/p/POST9/', src: 'https://images.unsplash.com/photo-1510414696678-2415ad8474aa?q=80&w=800&auto=format&fit=crop' },
+      { href: 'https://www.instagram.com/p/POST10/', src: 'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=800&auto=format&fit=crop' },
+      { href: 'https://www.instagram.com/p/POST11/', src: 'https://images.unsplash.com/photo-1516880711640-ef7db81be3e6?q=80&w=800&auto=format&fit=crop' },
+      { href: 'https://www.instagram.com/p/POST12/', src: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop' }
+    ];
+
     const PRICE_DATA = [
       { key: 'services.cut', en: 'Cut', vi: 'Cắt tóc', price: '200K–350K' },
       { key: 'services.color', en: 'Color', vi: 'Nhuộm', price: '700K–1.5M' },
@@ -257,12 +340,12 @@
       { key: 'services.treatment', en: 'Treatment', vi: 'Phục hồi', price: '400K–900K' }
     ];
 
-    const POPULAR = ['Cut + Treatment', 'Color + Treatment', 'Perm + Cut'];
+    const POPULAR = { en: ['Cut + Treatment', 'Color + Treatment', 'Perm + Cut'], vi: ['Cắt + Phục hồi', 'Nhuộm + Phục hồi', 'Uốn + Cắt'] };
 
     // ====== I18N STRINGS ======
     const I18N = {
       en: {
-        brand: 'AURORA HAIR',
+        brand: 'JU HAIR SALON',
         'nav.home': 'Home',
         'nav.prices': 'Prices',
         'nav.contact': 'Contact',
@@ -270,9 +353,15 @@
         'cta.bookFull': 'Book an appointment',
         'cta.viewPrices': 'View prices',
         'cta.bookNow': 'Book now',
-        'hero.title': 'Hair that matches your rhythm.',
-        'hero.subtitle': 'Cut, color, and care — crafted with precision and heart, in District 1.',
+        'hero.eyebrow': 'Our Studio',
+        'hero.title': 'Behind the Chair',
+        'hero.kicker': 'Hair Salon & Studio',
+        'hero.addr1': '317 Lý Tự Trọng, Phường Bến Thành, Quận 1,',
+        'hero.addr2': 'Ho Chi Minh City',
         'gallery.title': 'Gallery',
+        'brands.title': 'Our Trusted Brand Partners',
+        'social.follow': 'Follow us at Instagram!',
+        'insta.subtitle': 'We regularly update our hairstyles and news on our official Instagram channel.',
         'prices.title': 'Our Prices',
         'prices.note': 'Transparent, simple tiers. Student discount on weekdays.',
         'prices.service': 'Service',
@@ -297,7 +386,7 @@
         'services.treatment': 'Treatment'
       },
       vi: {
-        brand: 'AURORA HAIR',
+        brand: 'JU HAIR SALON',
         'nav.home': 'Trang chủ',
         'nav.prices': 'Bảng giá',
         'nav.contact': 'Liên hệ',
@@ -305,9 +394,15 @@
         'cta.bookFull': 'Đặt lịch hẹn',
         'cta.viewPrices': 'Xem giá',
         'cta.bookNow': 'Đặt ngay',
-        'hero.title': 'Kiểu tóc hợp nhịp sống của bạn.',
-        'hero.subtitle': 'Cắt, nhuộm, chăm sóc — tỉ mỉ và tận tâm tại Quận 1.',
+        'hero.eyebrow': 'Studio của chúng tôi',
+        'hero.title': 'Behind the Chair',
+        'hero.kicker': 'Hair Salon & Studio',
+        'hero.addr1': '317 Lý Tự Trọng, Phường Bến Thành, Quận 1,',
+        'hero.addr2': 'TP. Hồ Chí Minh, Việt Nam',
         'gallery.title': 'Hình ảnh',
+        'brands.title': 'Đối tác thương hiệu uy tín',
+        'social.follow': 'Theo dõi chúng tôi trên Instagram!',
+        'insta.subtitle': 'Chúng tôi thường xuyên cập nhật kiểu tóc và tin mới trên kênh Instagram chính thức.',
         'prices.title': 'Bảng giá',
         'prices.note': 'Minh bạch, dễ hiểu. Giảm giá sinh viên các ngày trong tuần.',
         'prices.service': 'Dịch vụ',
@@ -335,6 +430,7 @@
 
     // ====== RENDER HELPERS ======
     function applyLanguage(lang){
+      document.documentElement.setAttribute('lang', lang);
       document.body.setAttribute('data-language', lang);
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -359,6 +455,43 @@
       });
     }
 
+    function renderBrandCarousel(){
+      const slides = document.getElementById('brand-slides');
+      const indicators = document.getElementById('brand-indicators');
+      if(!slides || !indicators) return;
+      slides.innerHTML = '';
+      indicators.innerHTML = '';
+      BRANDS.forEach((src, idx)=>{
+        const item = document.createElement('div');
+        item.className = 'carousel-item' + (idx===0 ? ' active' : '');
+        item.innerHTML = `<img src="${src}" class="d-block w-100" alt="Brand slide ${idx+1}">`;
+        slides.appendChild(item);
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('data-bs-target','#brandCarousel');
+        dot.setAttribute('data-bs-slide-to', String(idx));
+        if(idx===0) dot.classList.add('active');
+        indicators.appendChild(dot);
+      });
+    }
+
+    function renderInstagramFeed(){
+      const grid = document.getElementById('ig-grid');
+      if(!grid) return;
+      grid.innerHTML = '';
+      INSTAGRAM_POSTS.forEach((post, i) => {
+        const a = document.createElement('a');
+        a.className = 'ig-card ratio ratio-1x1';
+        a.href = (post.href || (INSTAGRAM.URL || '#'));
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.innerHTML = `<img src="${post.src}" alt="${post.alt || ('Instagram post ' + (i+1))}">`;
+        grid.appendChild(a);
+      });
+      const handleLink = document.getElementById('ig-handle-link');
+      if(handleLink){ handleLink.href = INSTAGRAM.URL; handleLink.textContent = '@' + (INSTAGRAM.HANDLE || '').toUpperCase(); }
+    }
+
     function renderPrices(lang){
       const priceTable = document.getElementById('price-table');
       const priceImgWrap = document.getElementById('price-image-wrap');
@@ -379,7 +512,7 @@
         // Popular list
         const list = document.getElementById('popular-list');
         list.innerHTML = '';
-        POPULAR.forEach(p => {
+        (POPULAR[lang] || POPULAR.en).forEach(p => {
           const li = document.createElement('li');
           li.textContent = p;
           list.appendChild(li);
@@ -389,7 +522,7 @@
 
     function initBasics(){
       // Address + hotline fill everywhere
-      const telHref = `tel:${CONFIG.HOTLINE.replace(/\s/g,'')}`;
+      const telHref = 'tel:' + CONFIG.HOTLINE.split(' ').join('');
       document.getElementById('hotline').href = telHref;
       document.getElementById('hotline').textContent = CONFIG.HOTLINE;
       document.getElementById('hotline-footer').href = telHref;
@@ -397,18 +530,26 @@
       document.getElementById('call-hotline').href = telHref;
       document.getElementById('address').textContent = CONFIG.ADDRESS;
       document.getElementById('address-footer').textContent = CONFIG.ADDRESS;
-      const mapUrl = `https://maps.google.com/?q=${CONFIG.MAP_QUERY}`;
+      var mapUrl = 'https://maps.google.com/?q=' + CONFIG.MAP_QUERY;
       document.getElementById('map-link').href = mapUrl;
       document.getElementById('map-footer').href = mapUrl;
-      document.getElementById('map-embed').src = `https://www.google.com/maps?q=${CONFIG.MAP_QUERY}&output=embed`;
+      document.getElementById('map-embed').src = 'https://www.google.com/maps?q=' + CONFIG.MAP_QUERY + '&output=embed';
+      var fb = document.getElementById('facebook-link');
+      if(fb && CONFIG.FACEBOOK_URL){ fb.href = CONFIG.FACEBOOK_URL; fb.target = '_blank'; fb.rel = 'noopener'; }
       document.getElementById('year').textContent = new Date().getFullYear();
     }
 
     function initLanguage(){
-      const startLang = (navigator.language || '').startsWith('vi') ? 'vi' : CONFIG.LANGUAGE_DEFAULT;
-      applyLanguage(startLang);
-      document.getElementById('lang-en').addEventListener('click', () => applyLanguage('en'));
-      document.getElementById('lang-vi').addEventListener('click', () => applyLanguage('vi'));
+      const saved = localStorage.getItem('siteLang');
+      const startLang = saved || ((navigator.language || '').startsWith('vi') ? 'vi' : CONFIG.LANGUAGE_DEFAULT);
+      const currentFlag = document.getElementById('current-flag');
+      const setFlag = (lang)=> currentFlag && (currentFlag.textContent = lang==='vi' ? '🇻🇳' : '🇺🇸');
+      const setLang = (lang)=>{ applyLanguage(lang); setFlag(lang); localStorage.setItem('siteLang', lang); };
+      setLang(startLang);
+      const en = document.getElementById('lang-en');
+      const vi = document.getElementById('lang-vi');
+      if(en) en.addEventListener('click', (e)=>{ e.preventDefault(); setLang('en'); });
+      if(vi) vi.addEventListener('click', (e)=>{ e.preventDefault(); setLang('vi'); });
     }
 
     function initBooking(){
@@ -427,6 +568,8 @@
     document.addEventListener('DOMContentLoaded', () => {
       initBasics();
       renderGallery();
+      renderBrandCarousel();
+      renderInstagramFeed();
       initLanguage();
       renderPrices(document.body.getAttribute('data-language'));
       initBooking();
