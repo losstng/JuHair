@@ -1,21 +1,29 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Phone,
-  MapPin,
-  Instagram,
-  Facebook,
-  Youtube,
-  Calendar,
-  Globe,
-  Languages,
-  Menu,
-  X,
-  Image as ImageIcon,
-  DollarSign,
-  Scissors,
-  House,
-} from "lucide-react";
+
+// Simple emoji-based icons so the app runs without extra dependencies
+const ICONS = {
+  phone: "📞",
+  map: "📍",
+  instagram: "📸",
+  facebook: "📘",
+  youtube: "▶️",
+  calendar: "📅",
+  languages: "🌐",
+  menu: "☰",
+  close: "✖️",
+  image: "🖼️",
+  dollar: "💲",
+  scissors: "✂️",
+  house: "🏠",
+};
+
+function Icon({ label, symbol }: { label?: string; symbol: string }) {
+  return (
+    <span role="img" aria-label={label} className="inline-block mr-1 align-[-0.125em]">
+      {symbol}
+    </span>
+  );
+}
 
 // ----------------------
 // Minimal i18n utilities
@@ -185,19 +193,19 @@ function Nav({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-3">
-            <Scissors className="w-6 h-6" />
+            <Icon symbol={ICONS.scissors} />
             <span className="font-semibold tracking-wide">{t("brand.name")}</span>
           </div>
 
           <div className="hidden md:flex items-center gap-2">
             <NavLink p="home">
-              <House className="w-4 h-4 mr-1 inline" /> {t("nav.home")}
+              <Icon symbol={ICONS.house} /> {t("nav.home")}
             </NavLink>
             <NavLink p="prices">
-              <DollarSign className="w-4 h-4 mr-1 inline" /> {t("nav.prices")}
+              <Icon symbol={ICONS.dollar} /> {t("nav.prices")}
             </NavLink>
             <NavLink p="gallery">
-              <ImageIcon className="w-4 h-4 mr-1 inline" /> {t("nav.gallery")}
+              <Icon symbol={ICONS.image} /> {t("nav.gallery")}
             </NavLink>
           </div>
 
@@ -207,7 +215,7 @@ function Nav({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
               className="inline-flex items-center gap-2 px-3 py-2 rounded-xl border hover:bg-black/5"
               aria-label="Toggle language"
             >
-              <Languages className="w-4 h-4" />
+              <Icon symbol={ICONS.languages} />
               <span className="uppercase text-xs font-semibold">{lang}</span>
             </button>
             <a
@@ -216,46 +224,39 @@ function Nav({ page, setPage }: { page: Page; setPage: (p: Page) => void }) {
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-black text-white hover:bg-black/90"
             >
-              <Calendar className="w-4 h-4" /> {t("cta.book")}
+              <Icon symbol={ICONS.calendar} /> {t("cta.book")}
             </a>
           </div>
 
           <button className="md:hidden p-2" onClick={() => setOpen((v) => !v)} aria-label="Menu">
-            {open ? <X /> : <Menu />}
+            <span aria-hidden="true">{open ? ICONS.close : ICONS.menu}</span>
           </button>
         </div>
 
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden border-t"
-            >
-              <div className="py-3 flex flex-col gap-2">
-                <NavLink p="home">{t("nav.home")}</NavLink>
-                <NavLink p="prices">{t("nav.prices")}</NavLink>
-                <NavLink p="gallery">{t("nav.gallery")}</NavLink>
-                <button
-                  onClick={() => setLang(lang === "en" ? "vi" : "en")}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-xl border w-max"
-                >
-                  <Languages className="w-4 h-4" />
-                  <span className="uppercase text-xs font-semibold">{lang}</span>
-                </button>
-                <a
-                  href={BOOKING_LINK}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-black text-white w-max"
-                >
-                  <Calendar className="w-4 h-4" /> {t("cta.book")}
-                </a>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {open && (
+          <div className="md:hidden border-t">
+            <div className="py-3 flex flex-col gap-2">
+              <NavLink p="home">{t("nav.home")}</NavLink>
+              <NavLink p="prices">{t("nav.prices")}</NavLink>
+              <NavLink p="gallery">{t("nav.gallery")}</NavLink>
+              <button
+                onClick={() => setLang(lang === "en" ? "vi" : "en")}
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-xl border w-max"
+              >
+                <Icon symbol={ICONS.languages} />
+                <span className="uppercase text-xs font-semibold">{lang}</span>
+              </button>
+              <a
+                href={BOOKING_LINK}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-black text-white w-max"
+              >
+                <Icon symbol={ICONS.calendar} /> {t("cta.book")}
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -304,10 +305,10 @@ function Footer() {
               <h3 className="text-lg font-semibold">{t("footer.follow")}</h3>
               <div className="mt-2 flex items-center gap-4">
                 <a href={SOCIALS.facebook} aria-label="Facebook" className="p-2 rounded-full bg-white/5 hover:bg-white/10">
-                  <Facebook className="w-5 h-5" />
+                  <Icon symbol={ICONS.facebook} />
                 </a>
                 <a href={SOCIALS.instagram} aria-label="Instagram" className="p-2 rounded-full bg-white/5 hover:bg-white/10">
-                  <Instagram className="w-5 h-5" />
+                  <Icon symbol={ICONS.instagram} />
                 </a>
                 <a href={SOCIALS.tiktok} aria-label="TikTok" className="p-2 rounded-full bg-white/5 hover:bg-white/10">
                   <TikTokIcon className="w-5 h-5" />
@@ -367,17 +368,13 @@ function GalleryStrip({ title = "" }: { title?: string }) {
         </div>
         <div className="overflow-x-auto">
           <div className="flex gap-4 min-w-max">
-            {GALLERY.map((img, i) => (
-              <motion.img
+            {GALLERY.map((img) => (
+              <img
                 key={img.url}
                 src={img.url}
                 alt={img.alt}
                 loading="lazy"
                 className="h-56 w-40 sm:h-64 sm:w-48 object-cover rounded-2xl border shadow-sm"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
               />
             ))}
           </div>
@@ -399,14 +396,9 @@ function HomePage() {
       <section className="relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <motion.h1
-              className="text-4xl sm:text-5xl font-semibold tracking-tight"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-            >
+            <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
               {t("hero.title")}
-            </motion.h1>
+            </h1>
             <p className="mt-4 text-neutral-600 text-lg">{t("hero.subtitle")}</p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -416,13 +408,13 @@ function HomePage() {
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-black text-white hover:bg-black/90"
               >
-                <Calendar className="w-4 h-4" /> {t("cta.book")}
+                <Icon symbol={ICONS.calendar} /> {t("cta.book")}
               </a>
               <a
                 href={`tel:${HOTLINE.replace(/\s/g, "")}`}
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl border hover:bg-black/5"
               >
-                <Phone className="w-4 h-4" /> {HOTLINE}
+                <Icon symbol={ICONS.phone} /> {HOTLINE}
               </a>
             </div>
           </div>
@@ -526,16 +518,12 @@ function GalleryPage() {
       <h1 className="text-3xl font-semibold mb-6">{t("nav.gallery")}</h1>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {GALLERY.concat(GALLERY).map((img, i) => (
-          <motion.img
+          <img
             key={`${img.url}-${i}`}
             src={img.url}
             alt={img.alt}
             loading="lazy"
             className="w-full h-56 object-cover rounded-2xl border shadow-sm"
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.25, delay: (i % 8) * 0.03 }}
           />
         ))}
       </div>
@@ -560,20 +548,11 @@ export default function App() {
       <div className="min-h-dvh flex flex-col">
         <Nav page={page} setPage={setPage} />
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={page}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="flex-1"
-          >
-            {page === "home" && <HomePage />}
-            {page === "prices" && <PricesPage />}
-            {page === "gallery" && <GalleryPage />}
-          </motion.div>
-        </AnimatePresence>
+        <div className="flex-1">
+          {page === "home" && <HomePage />}
+          {page === "prices" && <PricesPage />}
+          {page === "gallery" && <GalleryPage />}
+        </div>
 
         <Footer />
 
@@ -585,14 +564,14 @@ export default function App() {
             rel="noreferrer"
             className="inline-flex items-center gap-2 px-4 py-3 rounded-2xl shadow-lg bg-black text-white hover:bg-black/90"
           >
-            <Calendar className="w-4 h-4" /> {t("cta.book")}
+            <Icon symbol={ICONS.calendar} /> {t("cta.book")}
           </a>
           <button
             onClick={() => copyToClipboard(HOTLINE)}
             className="inline-flex items-center gap-2 px-4 py-3 rounded-2xl shadow-lg border bg-white hover:bg-black/5"
             title={t("footer.hotline")}
           >
-            <Phone className="w-4 h-4" /> {HOTLINE}
+            <Icon symbol={ICONS.phone} /> {HOTLINE}
           </button>
         </div>
       </div>
