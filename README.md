@@ -1,10 +1,10 @@
 # JuHair
 
-Static salon website built with [Astro](https://astro.build/), TypeScript and Tailwind CSS. The site is designed for bilingual content (English/Vietnamese) and ships as static HTML for fast performance and SEO.
+Static salon website rebuilt with [React](https://reactjs.org/), TypeScript, Vite, and Tailwind CSS. The project provides a bilingual foundation (English/Vietnamese) with shared navigation, hero, and footer components.
 
 ## Development
 
-This repository currently includes only the file structure and example components. Install dependencies and run the development server:
+Install dependencies and start the development server:
 
 ```bash
 npm install
@@ -14,4 +14,3 @@ npm run dev
 ## License
 
 MIT
-
