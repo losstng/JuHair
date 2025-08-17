@@ -1,8 +1,7 @@
 ---
 import Layout from '../../layouts/Default.astro';
-import Footer from '../../components/Footer.astro';
-import LanguageToggle from '../../components/LanguageToggle.tsx';
 import Gallery from '../../components/Gallery.astro';
+
 const lang = 'en';
 const images = [
   { src: '/images/sample1.jpg', alt: 'Sample 1' },
@@ -10,12 +9,8 @@ const images = [
 ];
 ---
 <Layout lang={lang} title="Gallery">
-  <header>
-    <LanguageToggle client:load lang={lang} />
-  </header>
   <main>
     <h1>Gallery</h1>
     <Gallery images={images} />
   </main>
-  <Footer lang={lang} hotline="+84 123456789" address="123 Street, Hanoi" bookingUrl="#" />
 </Layout>

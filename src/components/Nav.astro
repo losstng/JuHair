@@ -1,0 +1,29 @@
+---
+import type { Lang } from '../../i18n';
+import { ui } from '../../i18n';
+import LanguageToggle from './LanguageToggle.tsx';
+
+export interface Props {
+  lang: Lang;
+  bookingUrl?: string;
+}
+
+const { lang, bookingUrl = '#' } = Astro.props as Props;
+
+const links = [
+  { href: `/${lang}/`, label: ui[lang].nav.home },
+  { href: bookingUrl, label: ui[lang].nav.book },
+  { href: `/${lang}/about`, label: ui[lang].nav.about },
+  { href: `/${lang}/services`, label: ui[lang].nav.price },
+  { href: `/${lang}/warranty`, label: ui[lang].nav.warranty },
+  { href: `/${lang}/news`, label: ui[lang].nav.news },
+];
+---
+<nav>
+  <ul>
+    {links.map((l) => (
+      <li><a href={l.href}>{l.label}</a></li>
+    ))}
+  </ul>
+  <LanguageToggle client:load lang={lang} />
+</nav>

@@ -1,11 +1,24 @@
 ---
 import type { Lang } from '../../i18n';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
 export interface Props {
   lang: Lang;
   title: string;
   description?: string;
+  hotline?: string;
+  address?: string;
+  bookingUrl?: string;
 }
-const { lang, title, description } = Astro.props as Props;
+const {
+  lang,
+  title,
+  description,
+  hotline = '+84 123456789',
+  address = '407/3 Lê Văn Sỹ, Ward 12, District 3, HCMC',
+  bookingUrl = '#',
+} = Astro.props as Props;
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -15,6 +28,8 @@ const { lang, title, description } = Astro.props as Props;
     {description && <meta name="description" content={description} />}
   </head>
   <body>
+    <Nav lang={lang} bookingUrl={bookingUrl} />
     <slot />
+    <Footer lang={lang} hotline={hotline} address={address} bookingUrl={bookingUrl} />
   </body>
 </html>

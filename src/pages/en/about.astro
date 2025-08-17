@@ -1,15 +1,10 @@
 ---
 import Layout from '../../layouts/Default.astro';
-import Footer from '../../components/Footer.astro';
-import LanguageToggle from '../../components/LanguageToggle.tsx';
+
 const lang = 'en';
 ---
 <Layout lang={lang} title="About">
-  <header>
-    <LanguageToggle client:load lang={lang} />
-  </header>
   <main>
     <h1>About</h1>
   </main>
-  <Footer lang={lang} hotline="+84 123456789" address="123 Street, Hanoi" bookingUrl="#" />
 </Layout>

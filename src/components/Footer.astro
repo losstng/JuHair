@@ -10,7 +10,16 @@ export interface Props {
 const { lang, hotline, address, bookingUrl } = Astro.props as Props;
 ---
 <footer>
-  <p><a href={`tel:${hotline}`}>{hotline}</a></p>
-  <p><a href="https://maps.google.com" target="_blank" rel="noopener">{address}</a></p>
-  <p><a href={bookingUrl}>{ui[lang].book}</a></p>
+  <div>
+    <h2>{ui[lang].footer.hotline}</h2>
+    <p><a href={`tel:${hotline}`}>{hotline}</a></p>
+  </div>
+  <div>
+    <h2>{ui[lang].footer.address}</h2>
+    <p><a href="https://maps.google.com" target="_blank" rel="noopener">{address}</a></p>
+    <p><a href="https://maps.google.com" target="_blank" rel="noopener">{ui[lang].footer.openMap}</a></p>
+  </div>
+  <div>
+    <a href={bookingUrl}>{ui[lang].footer.book}</a>
+  </div>
 </footer>
