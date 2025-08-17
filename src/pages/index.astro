@@ -1,0 +1,96 @@
+---
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Gallery from '../components/Gallery.astro';
+import Footer from '../components/Footer.astro';
+import About from '../content/vi/about.mdx';
+import Services from '../content/vi/services.mdx';
+
+const images = [
+  { src: 'https://via.placeholder.com/400x500', alt: 'Mẫu tóc 1' },
+  { src: 'https://via.placeholder.com/400x500', alt: 'Mẫu tóc 2' },
+  { src: 'https://via.placeholder.com/400x500', alt: 'Mẫu tóc 3' },
+];
+
+const lang = 'vi';
+const bookingUrl = '#dat-lich';
+---
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Salon tóc hiện đại | Behind The Chair Hair Studio</title>
+  <meta name="description" content="Behind The Chair Hair Studio là một salon tóc theo phong cách hiện đại và tối giản. Phục vụ khách hàng trẻ phân khúc trung bình–cao cấp. Trải nghiệm dịch vụ chuyên nghiệp và sáng tạo.">
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#EFE8DD" />
+
+  <link rel="canonical" href="https://btchairstudio.com/">
+  <link rel="alternate" hreflang="x-default" href="https://btchairstudio.com/">
+  <link rel="alternate" hreflang="vi" href="https://btchairstudio.com/">
+  <link rel="alternate" hreflang="en" href="https://btchairstudio.com/en/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Behind The Chair Hair Studio">
+  <meta property="og:url" content="https://btchairstudio.com/">
+  <meta property="og:title" content="Salon tóc hiện đại | Behind The Chair Hair Studio">
+  <meta property="og:description" content="Salon tóc hiện đại, tối giản. Dịch vụ chuyên nghiệp & sáng tạo tại Quận 3, TP.HCM.">
+  <meta property="og:image" content="REPLACE_WITH_ABSOLUTE_OG_IMAGE_URL">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:locale:alternate" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Salon tóc hiện đại | Behind The Chair Hair Studio">
+  <meta name="twitter:description" content="Salon tóc hiện đại, tối giản. Dịch vụ chuyên nghiệp & sáng tạo tại Quận 3, TP.HCM.">
+  <meta name="twitter:image" content="REPLACE_WITH_ABSOLUTE_OG_IMAGE_URL">
+
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+
+  <!-- LCP boost: preload the hero -->
+  <link rel="preload" as="image" href="/images/hero-vi.jpg" fetchpriority="high">
+
+  <!-- Fonts: keep system stack for speed.
+       If using a brand font, self-host and preload it. -->
+  <!-- <link rel="preload" href="/fonts/svn-magnificent-regular.woff2" as="font" type="font/woff2" crossorigin> -->
+
+  <!-- Structured data (simple). Add LocalBusiness later when phone/hours finalized. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Behind The Chair Hair Studio",
+    "url": "https://btchairstudio.com",
+    "inLanguage": "vi",
+    "description": "Salon tóc hiện đại và tối giản tại Quận 3, TP.HCM."
+  }
+  </script>
+  </head>
+  <body>
+    <Nav lang={lang} bookingUrl={bookingUrl} />
+    <Hero lang={lang} bookingUrl={bookingUrl} switchLangHref="/en/" />
+    <section id="about">
+      <About />
+    </section>
+    <section id="price">
+      <Services />
+    </section>
+    <section id="gallery">
+      <Gallery images={images} />
+    </section>
+    <section id="warranty">
+      <h2>Chính sách bảo hành</h2>
+    </section>
+    <section id="news">
+      <h2>Tin tức</h2>
+    </section>
+    <Footer lang={lang} hotline="+84 123456789" address="407/3 Lê Văn Sỹ, Ward 12, District 3, HCMC" bookingUrl={bookingUrl} />
+  </body>
+</html>

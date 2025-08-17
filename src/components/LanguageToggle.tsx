@@ -9,8 +9,8 @@ export default function LanguageToggle({ lang }: Props) {
   const [current, setCurrent] = useState<Lang>(lang);
   const toggle = () => {
     const next = current === 'en' ? 'vi' : 'en';
-    const path = window.location.pathname.replace(`/${current}`, `/${next}`);
-    window.location.pathname = path;
+    const nextPath = next === 'vi' ? '/' : '/en/';
+    window.location.pathname = nextPath;
     setCurrent(next);
   };
   return (

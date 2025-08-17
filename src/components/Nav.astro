@@ -8,15 +8,16 @@ export interface Props {
   bookingUrl?: string;
 }
 
-const { lang, bookingUrl = '#' } = Astro.props as Props;
+const { lang, bookingUrl = '#book' } = Astro.props as Props;
 
+const homeHref = lang === 'vi' ? '/' : '/en/';
 const links = [
-  { href: `/${lang}/`, label: ui[lang].nav.home },
+  { href: homeHref, label: ui[lang].nav.home },
   { href: bookingUrl, label: ui[lang].nav.book },
-  { href: `/${lang}/about`, label: ui[lang].nav.about },
-  { href: `/${lang}/services`, label: ui[lang].nav.price },
-  { href: `/${lang}/warranty`, label: ui[lang].nav.warranty },
-  { href: `/${lang}/news`, label: ui[lang].nav.news },
+  { href: '#about', label: ui[lang].nav.about },
+  { href: '#price', label: ui[lang].nav.price },
+  { href: '#warranty', label: ui[lang].nav.warranty },
+  { href: '#news', label: ui[lang].nav.news },
 ];
 ---
 <nav>

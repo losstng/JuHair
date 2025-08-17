@@ -1,11 +1,87 @@
 ---
-import Layout from '../../layouts/Default.astro';
+import Nav from '../../components/Nav.astro';
 import Hero from '../../components/Hero.astro';
+import Gallery from '../../components/Gallery.astro';
+import Footer from '../../components/Footer.astro';
+import About from '../../content/en/about.mdx';
+import Services from '../../content/en/services.mdx';
+
+const images = [
+  { src: 'https://via.placeholder.com/400x500', alt: 'Hair sample 1' },
+  { src: 'https://via.placeholder.com/400x500', alt: 'Hair sample 2' },
+  { src: 'https://via.placeholder.com/400x500', alt: 'Hair sample 3' },
+];
 
 const lang = 'en';
 const bookingUrl = '#book';
-const switchLangHref = '/vi/';
 ---
-<Layout lang={lang} title="JuHair" bookingUrl={bookingUrl}>
-  <Hero lang={lang} bookingUrl={bookingUrl} switchLangHref={switchLangHref} />
-</Layout>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Modern Hair Salon | Behind The Chair Hair Studio</title>
+  <meta name="description" content="A modern, minimalist hair studio for style-driven clients. Professional, creative services in District 3, Ho Chi Minh City.">
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#EFE8DD" />
+
+  <link rel="canonical" href="https://btchairstudio.com/en/">
+  <link rel="alternate" hreflang="x-default" href="https://btchairstudio.com/">
+  <link rel="alternate" hreflang="vi" href="https://btchairstudio.com/">
+  <link rel="alternate" hreflang="en" href="https://btchairstudio.com/en/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Behind The Chair Hair Studio">
+  <meta property="og:url" content="https://btchairstudio.com/en/">
+  <meta property="og:title" content="Modern Hair Salon | Behind The Chair Hair Studio">
+  <meta property="og:description" content="Modern, minimalist salon. Professional & creative services in District 3, HCMC.">
+  <meta property="og:image" content="REPLACE_WITH_ABSOLUTE_OG_IMAGE_URL">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="vi_VN">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Modern Hair Salon | Behind The Chair Hair Studio">
+  <meta name="twitter:description" content="Modern, minimalist salon in HCMC.">
+  <meta name="twitter:image" content="REPLACE_WITH_ABSOLUTE_OG_IMAGE_URL">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+
+  <link rel="preload" as="image" href="/images/hero-en.jpg" fetchpriority="high">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Behind The Chair Hair Studio",
+    "url": "https://btchairstudio.com/en/",
+    "inLanguage": "en",
+    "description": "Modern, minimalist hair studio in HCMC."
+  }
+  </script>
+  </head>
+  <body>
+    <Nav lang={lang} bookingUrl={bookingUrl} />
+    <Hero lang={lang} bookingUrl={bookingUrl} switchLangHref="/" />
+    <section id="about">
+      <About />
+    </section>
+    <section id="price">
+      <Services />
+    </section>
+    <section id="gallery">
+      <Gallery images={images} />
+    </section>
+    <section id="warranty">
+      <h2>Warranty</h2>
+    </section>
+    <section id="news">
+      <h2>News</h2>
+    </section>
+    <Footer lang={lang} hotline="+84 123456789" address="407/3 Lê Văn Sỹ, Ward 12, District 3, HCMC" bookingUrl={bookingUrl} />
+  </body>
+</html>
