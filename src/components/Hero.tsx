@@ -1,3 +1,5 @@
+import { BOOKING_LINK, HOTLINE } from '../data';
+
 interface Props {
   t: typeof import('../../i18n/en').default;
 }
@@ -14,13 +16,15 @@ export default function Hero({ t }: Props) {
       <p className="mt-4">{t.hero.address}</p>
       <div className="mt-6 flex justify-center gap-4">
         <a
-          href="#book"
+          href={BOOKING_LINK}
+          target="_blank"
+          rel="noreferrer"
           className="px-6 py-3 bg-black text-white rounded-full"
         >
           {t.hero.ctaPrimary}
         </a>
         <a
-          href="#"
+          href={`tel:${HOTLINE.replace(/\s/g, '')}`}
           className="px-6 py-3 border border-black rounded-full"
         >
           {t.hero.ctaSecondary}
