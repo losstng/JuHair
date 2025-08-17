@@ -22,7 +22,11 @@
     .gallery-img{ width:100%; height:220px; object-fit:cover; border-radius:.5rem; }
     .btn-accent{ background: var(--accent); border-color: var(--accent); }
     .btn-accent:hover{ filter: brightness(0.95); }
-    .price-img { max-width: 100%; border-radius: .5rem; box-shadow: 0 10px 25px rgba(0,0,0,.08); }
+  .price-img { max-width: 100%; border-radius: .5rem; box-shadow: 0 10px 25px rgba(0,0,0,.08); }
+  #prices .card { background: #fff; border-radius: 1rem; }
+  #prices .card-body { padding: 2rem 2rem 1.5rem 2rem; }
+  #prices .table { font-size: 1.08rem; }
+  #prices .btn-accent { font-size: 1.1rem; }
     footer a { text-decoration: none; }
     .lang-toggle .btn{ padding: .25rem .6rem; }
 
@@ -53,6 +57,36 @@
     .ig-card{overflow:hidden;border-radius:.5rem}
     .ig-card img{width:100%;height:100%;object-fit:cover;transition:transform .25s ease}
     .ig-card:hover img{transform:scale(1.03)}
+      .lang-flags .btn.active{background:#111;color:#fff;border-color:#111}
+
+  /* Target just this button */
+  #zFwQon {
+    /* Sizing & alignment */
+    width: 20%;
+    display: block;              /* ignores parent text-align:center */
+    margin: 0 auto 0 0;          /* pushes left in flex/grid/normal flow */
+    justify-self: start;         /* if parent is CSS Grid */
+
+    /* Colors (default = black fill, white text) */
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #000;
+    text-decoration: none;
+
+    /* Smooth invert */
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  }
+
+  #zFwQon:hover,
+  #zFwQon:focus-visible {
+    background-color: #fff;      /* invert fill */
+    color: #000 !important;      /* ensure text is black */
+    border-color: #000;          /* keep a clear outline */
+  }
+  /* Smooth scroll and offset so anchored footer isn't hidden by sticky navbar */
+  html { scroll-behavior: smooth; }
+  /* When scrolling to the footer, leave a margin equal to navbar height (~72px) */
+  #footer { scroll-margin-top: 80px; }
   </style>
 </head>
 <body data-language="en">
@@ -67,17 +101,18 @@
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link" href="#home" data-i18n="nav.home">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#prices" data-i18n="nav.prices">Prices</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact" data-i18n="nav.contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#footer" data-i18n="nav.footer">Contact</a></li>
         </ul>
-        <div class="dropdown ms-lg-0 ms-auto">
-          <button class="btn btn-outline-dark btn-sm dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <span id="current-flag" class="fs-6">🇺🇸</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#" id="lang-en">🇺🇸 English</a></li>
-            <li><a class="dropdown-item" href="#" id="lang-vi">🇻🇳 Tiếng Việt</a></li>
-          </ul>
-        </div>
+        <div class="ms-lg-0 ms-auto lang-flags btn-group" role="group" aria-label="Language">
+  <button class="btn btn-outline-dark btn-sm" data-lang="en" aria-label="English" title="English">
+    <img src="https://flagcdn.com/us.svg" width="20" alt="English" style="vertical-align:middle; margin-right:4px;">
+    English
+  </button>
+  <button class="btn btn-outline-dark btn-sm" data-lang="vi" aria-label="Tiếng Việt" title="Tiếng Việt">
+    <img src="https://flagcdn.com/vn.svg" width="20" alt="Tiếng Việt" style="vertical-align:middle; margin-right:4px;">
+    Tiếng Việt
+  </button>
+</div>
       </div>
     </div>
   </nav>
@@ -92,7 +127,7 @@
         <p class="hero-address mb-0" data-i18n="hero.addr1">317 Lý Tự Trọng, Phường Bến Thành, Quận 1,</p>
         <p class="hero-address" data-i18n="hero.addr2">Hồ Chí Minh, Vietnam</p>
         <div class="d-flex gap-2 mt-3">
-          <a class="btn btn-accent text-white" data-bs-toggle="modal" data-bs-target="#bookingModal" href="#book"><i class="bi bi-calendar-event me-2"></i><span data-i18n="cta.bookFull">Book an appointment</span></a>
+          <a class="btn btn-accent text-white" href="https://www.facebook.com/juhair0923322333?mibextid=uzlsIk" target="_blank" rel="noopener"><i class="bi bi-calendar-event me-2"></i><span data-i18n="cta.bookFull">Book an appointment</span></a>
           <a class="btn btn-outline-light" href="#prices"><i class="bi bi-cash-coin me-2"></i><span data-i18n="cta.viewPrices">View prices</span></a>
         </div>
       </div>
@@ -138,67 +173,83 @@
   <!-- Prices -->
   <main id="prices" class="section">
     <div class="container">
-      <div class="row g-4 align-items-start">
+      <h2 class="display-6 fw-bold text-center mb-5" data-i18n="prices.title">Our Prices</h2>
+      <div class="row g-4 align-items-stretch">
         <div class="col-lg-6">
-          <h2 class="h3" data-i18n="prices.title">Our Prices</h2>
-          <p class="text-muted" data-i18n="prices.note">Transparent, simple tiers. Student discount on weekdays.</p>
-          <!-- OPTION A: Manual price table -->
-          <div id="price-table">
-            <div class="table-responsive">
-              <table class="table table-striped align-middle">
-                <thead>
-                  <tr>
-                    <th data-i18n="prices.service">Service</th>
-                    <th class="text-end" data-i18n="prices.price">Price</th>
-                  </tr>
-                </thead>
-                <tbody id="price-rows">
-                  <!-- Filled by JS from PRICE_DATA -->
-                </tbody>
-              </table>
+          <div class="card shadow-sm h-100 border-0">
+            <div class="card-body">
+              <p class="text-muted mb-4" data-i18n="prices.note">Transparent, simple tiers. Student discount on weekdays.</p>
+              <!-- OPTION A: Manual price table -->
+              <div id="price-table">
+                <div class="table-responsive">
+                  <table class="table table-striped align-middle mb-0">
+                    <thead>
+                      <tr>
+                        <th data-i18n="prices.service">Service</th>
+                        <th class="text-end" data-i18n="prices.price">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody id="price-rows">
+                      <!-- Filled by JS from PRICE_DATA -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- OPTION B: Single image (toggle in CONFIG below) -->
+              <div id="price-image-wrap" class="mt-3 d-none">
+                <img id="price-image" class="price-img" alt="Price list image" src="assets/pricelist.jpg" />
+              </div>
             </div>
-          </div>
-          <!-- OPTION B: Single image (toggle in CONFIG below) -->
-          <div id="price-image-wrap" class="mt-3 d-none">
-            <img id="price-image" class="price-img" alt="Price list image" src="assets/pricelist.jpg" />
           </div>
         </div>
         <div class="col-lg-6">
-          <div class="p-3 border rounded-3">
-            <h3 class="h5" data-i18n="prices.popular">Popular Packages</h3>
-            <ul class="mb-3" id="popular-list">
-              <!-- filled by JS -->
-            </ul>
-            <a class="btn btn-accent text-white" data-bs-toggle="modal" data-bs-target="#bookingModal" href="#book"><i class="bi bi-magic me-2"></i><span data-i18n="cta.bookNow">Book now</span></a>
+          <div class="card shadow-sm h-100 border-0">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <div>
+                <h3 class="h5 mb-3" data-i18n="prices.popular">Popular Packages</h3>
+                <ul class="mb-4" id="popular-list">
+                  <!-- filled by JS -->
+                </ul>
+              </div>
+              <div class="text-end mt-auto">
+                <a class="btn btn-accent text-white px-4 py-2" href="https://www.facebook.com/juhair0923322333?mibextid=uzlsIk" target="_blank" rel="noopener"><i class="bi bi-magic me-2"></i><span data-i18n="cta.bookNow">Book now</span></a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- Prices page gallery -->
-  <section class="section bg-light">
-    <div class="container">
-      <h2 class="h4 mb-3" data-i18n="gallery.title">Gallery</h2>
-      <div class="row g-3 gallery-container" data-gallery-target="prices"></div>
-    </div>
-  </section>
+  <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="contact.blackbar">Where to find us!</div></div></div>
 
-  <!-- Contact -->
-  <section id="contact" class="section">
+
+  <!-- Footer -->
+  <footer id="footer" class="py-4 border-top">
     <div class="container">
       <div class="row g-4">
         <div class="col-lg-6">
-          <h2 class="h3" data-i18n="contact.title">Find us</h2>
-          <p class="text-muted" data-i18n="contact.subtitle">We are in the city center with easy parking.</p>
-          <div class="d-flex flex-column gap-1">
-            <div><i class="bi bi-geo-alt me-2"></i><span id="address">317 Lý Tự Trọng, Phường Bến Thành, Quận 1, Hồ Chí Minh, Vietnam</span></div>
-            <div><i class="bi bi-telephone me-2"></i><a id="hotline" href="tel:0985678988">0985678988</a></div>
-            <div class="d-flex gap-3">
-              <a id="map-link" class="link-primary" target="_blank" rel="noopener" href="https://maps.google.com/?q=317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam"><i class="bi bi-map me-1"></i><span data-i18n="contact.openMap">Open in Google Maps</span></a>
-              <a id="facebook-link" class=\"link-primary\" href=\"https://www.facebook.com/juhair0923322333?mibextid=uzlsIk\" target=\"_blank\" rel=\"noopener\" aria-label=\"Facebook\"><i class="bi bi-facebook"></i></a>
-              <a class="link-primary" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-              <a class="link-primary" href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+          <div class="d-flex flex-column h-100 justify-content-center">
+            <h2 class="h2 mb-4" data-i18n="contact.title">Ju Hair Studio</h2>
+            <p class="text-muted fs-5 mb-4" data-i18n="contact.subtitle">We are in the city center with easy parking.</p>
+            <div class="d-flex flex-column gap-3">
+              <a
+    href="https://www.facebook.com/juhair0923322333?mibextid=uzlsIk"
+    target="_blank"
+    rel="nofollow"
+    class="btn btn-accent text-white py-2 fs-5"
+    id="zFwQon"
+  >Booking</a>
+
+              <div class="fs-5.5"><i class="bi bi-geo-alt me-3"></i><span id="address">317 Lý Tự Trọng, Phường Bến Thành, Quận 1, Hồ Chí Minh, Vietnam</span></div>
+              <div class="fs-5.5"><i class="bi bi-telephone me-3"></i><a id="hotline" href="tel:0985678988">0985678988</a></div>
+              <div class="d-flex gap-4 mt-3">
+                <a id="map-link" class="link-primary fs-6" target="_blank" rel="noopener" href="https://maps.google.com/?q=317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam"><i class="bi bi-map me-2"></i><span data-i18n="contact.openMap">Open in Google Maps</span></a>
+                <a id="facebook-link" class="link-primary fs-4" href="https://www.facebook.com/juhair0923322333?mibextid=uzlsIk" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a class="link-primary fs-4" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a class="link-primary fs-4" href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+              </div>
+              <div class="fs-5.5">© <span id="year"></span> <span data-i18n="brand">JU HAIR SALON</span></div>
             </div>
           </div>
         </div>
@@ -210,71 +261,9 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-4 border-top">
-    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
-      <div class="small">
-        <span class="me-3"><i class="bi bi-telephone me-1"></i><a id="hotline-footer" href="tel:0985678988">0985678988</a></span>
-        <span class="me-3"><i class="bi bi-geo-alt me-1"></i><span id="address-footer">317 Lý Tự Trọng, Phường Bến Thành, Quận 1, Hồ Chí Minh, Vietnam</span></span>
-        <a id="map-footer" class="me-2" target="_blank" rel="noopener" href="https://maps.google.com/?q=317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam"><i class="bi bi-map"></i> <span data-i18n="contact.openMap">Open in Google Maps</span></a>
-      </div>
-      <div class="small">© <span id="year"></span> <span data-i18n="brand">JU HAIR SALON</span></div>
-    </div>
   </footer>
 
-  <!-- Booking Modal -->
-  <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="bookingLabel" data-i18n="booking.title">Book an appointment</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="booking-form" class="vstack gap-3">
-            <div>
-              <label class="form-label" for="name" data-i18n="booking.name">Full name</label>
-              <input id="name" name="name" class="form-control" required />
-            </div>
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label" for="date" data-i18n="booking.date">Date</label>
-                <input id="date" name="date" class="form-control" type="date" required />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label" for="time" data-i18n="booking.time">Time</label>
-                <input id="time" name="time" class="form-control" type="time" required />
-              </div>
-            </div>
-            <div>
-              <label class="form-label" for="service" data-i18n="booking.service">Service</label>
-              <select id="service" name="service" class="form-select">
-                <option value="cut" data-i18n="services.cut">Cut</option>
-                <option value="color" data-i18n="services.color">Color</option>
-                <option value="perm" data-i18n="services.perm">Perm</option>
-                <option value="treatment" data-i18n="services.treatment">Treatment</option>
-              </select>
-            </div>
-            <div>
-              <label class="form-label" for="phone" data-i18n="booking.phone">Phone</label>
-              <input id="phone" name="phone" class="form-control" type="tel" required />
-            </div>
-            <div>
-              <label class="form-label" for="notes" data-i18n="booking.notes">Notes</label>
-              <textarea id="notes" name="notes" class="form-control" rows="3"></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <a id="call-hotline" href="tel:0985678988" class="me-auto"><i class="bi bi-telephone me-1"></i><span data-i18n="booking.call">Call hotline</span></a>
-          <button class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="booking.cancel">Cancel</button>
-          <button id="submit-booking" class="btn btn-accent text-white" data-i18n="booking.submit">Send request</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Booking flow moved to Facebook; modal removed -->
 
   <!-- CONFIG + DATA + I18N + RENDERING (vanilla JS) -->
   <script>
@@ -359,7 +348,8 @@
         'prices.service': 'Service',
         'prices.price': 'Price',
         'prices.popular': 'Popular Packages',
-        'contact.title': 'Find us',
+        'contact.title': 'Ju Hair Salon',
+        'contact.blackbar': 'Find Us Here!',
         'contact.subtitle': 'We are in the city center with easy parking.',
         'contact.openMap': 'Open in Google Maps',
         'booking.title': 'Book an appointment',
@@ -400,7 +390,8 @@
         'prices.service': 'Dịch vụ',
         'prices.price': 'Giá',
         'prices.popular': 'Gói nổi bật',
-        'contact.title': 'Tìm chúng tôi',
+        'contact.title': 'Ju Hair Salon',
+        'contact.blackbar': 'Find Us Here!',
         'contact.subtitle': 'Ngay trung tâm, đậu xe thuận tiện.',
         'contact.openMap': 'Mở Google Maps',
         'booking.title': 'Đặt lịch hẹn',
@@ -513,35 +504,39 @@
     }
 
     function initBasics(){
-      // Address + hotline fill everywhere
-      const telHref = 'tel:' + CONFIG.HOTLINE.split(' ').join('');
-      document.getElementById('hotline').href = telHref;
-      document.getElementById('hotline').textContent = CONFIG.HOTLINE;
-      document.getElementById('hotline-footer').href = telHref;
-      document.getElementById('hotline-footer').textContent = CONFIG.HOTLINE;
-      document.getElementById('call-hotline').href = telHref;
-      document.getElementById('address').textContent = CONFIG.ADDRESS;
-      document.getElementById('address-footer').textContent = CONFIG.ADDRESS;
-      var mapUrl = 'https://maps.google.com/?q=' + CONFIG.MAP_QUERY;
-      document.getElementById('map-link').href = mapUrl;
-      document.getElementById('map-footer').href = mapUrl;
-      document.getElementById('map-embed').src = 'https://www.google.com/maps?q=' + CONFIG.MAP_QUERY + '&output=embed';
-      var fb = document.getElementById('facebook-link');
-      if(fb && CONFIG.FACEBOOK_URL){ fb.href = CONFIG.FACEBOOK_URL; fb.target = '_blank'; fb.rel = 'noopener'; }
-      document.getElementById('year').textContent = new Date().getFullYear();
+  // Address + hotline fill everywhere — guard missing elements so runtime doesn't crash
+  const telHref = 'tel:' + CONFIG.HOTLINE.split(' ').join('');
+  const hotlineEl = document.getElementById('hotline');
+  if (hotlineEl) { hotlineEl.href = telHref; hotlineEl.textContent = CONFIG.HOTLINE; }
+  const hotlineFooter = document.getElementById('hotline-footer');
+  if (hotlineFooter) { hotlineFooter.href = telHref; hotlineFooter.textContent = CONFIG.HOTLINE; }
+  const callHotline = document.getElementById('call-hotline');
+  if (callHotline) callHotline.href = telHref;
+  const addressEl = document.getElementById('address');
+  if (addressEl) addressEl.textContent = CONFIG.ADDRESS;
+  const addressFooter = document.getElementById('address-footer');
+  if (addressFooter) addressFooter.textContent = CONFIG.ADDRESS;
+  var mapUrl = 'https://maps.google.com/?q=' + CONFIG.MAP_QUERY;
+  const mapLink = document.getElementById('map-link');
+  if (mapLink) mapLink.href = mapUrl;
+  const mapFooter = document.getElementById('map-footer');
+  if (mapFooter) mapFooter.href = mapUrl;
+  const mapEmbed = document.getElementById('map-embed');
+  if (mapEmbed) mapEmbed.src = 'https://www.google.com/maps?q=' + CONFIG.MAP_QUERY + '&output=embed';
+  var fb = document.getElementById('facebook-link');
+  if (fb && CONFIG.FACEBOOK_URL){ fb.href = CONFIG.FACEBOOK_URL; fb.target = '_blank'; fb.rel = 'noopener'; }
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
     }
 
     function initLanguage(){
       const saved = localStorage.getItem('siteLang');
       const startLang = saved || ((navigator.language || '').startsWith('vi') ? 'vi' : CONFIG.LANGUAGE_DEFAULT);
-      const currentFlag = document.getElementById('current-flag');
-      const setFlag = (lang)=> currentFlag && (currentFlag.textContent = lang==='vi' ? '🇻🇳' : '🇺🇸');
-      const setLang = (lang)=>{ applyLanguage(lang); setFlag(lang); localStorage.setItem('siteLang', lang); };
+      const btns = document.querySelectorAll('.lang-flags [data-lang]');
+      const setActive = (lang)=> btns.forEach(b=> b.classList.toggle('active', b.getAttribute('data-lang')===lang));
+      const setLang = (lang)=>{ applyLanguage(lang); setActive(lang); localStorage.setItem('siteLang', lang); document.documentElement.setAttribute('lang', lang); };
       setLang(startLang);
-      const en = document.getElementById('lang-en');
-      const vi = document.getElementById('lang-vi');
-      if(en) en.addEventListener('click', (e)=>{ e.preventDefault(); setLang('en'); });
-      if(vi) vi.addEventListener('click', (e)=>{ e.preventDefault(); setLang('vi'); });
+      btns.forEach(btn=> btn.addEventListener('click', (e)=>{ e.preventDefault(); setLang(btn.getAttribute('data-lang')); }));
     }
 
     function initBooking(){
