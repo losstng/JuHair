@@ -13,13 +13,23 @@
     :root { --brand: #111827; --accent: #e11d48; --nav-bg:#ece2d1; }
     .nav-cream{ background: var(--nav-bg); border-bottom:1px solid rgba(0,0,0,.08); }
     .navbar-brand{ text-transform: uppercase; letter-spacing:.35em; font-weight:700; font-size: .95rem; line-height:1.1; }
+    /* Gallery section background (custom) */
+    .gallery-section{ background: #EBEBE1; padding: 1.25rem 0; }
+    
     .navbar-nav .nav-link{ color:#111; padding:.75rem 1rem; }
     .navbar-nav .nav-link:hover{ color:#000; }
     .navbar-nav .nav-link.active{ font-weight:600; color:#111 !important; border-bottom:3px solid currentColor; border-radius:0; }
     .brand-gradient { background: linear-gradient(135deg, #111827 0%, #0f172a 50%, #111827 100%); }
     .hero { color: #fff; padding: 6rem 0; }
     .section { padding: 4rem 0; }
-    .gallery-img{ width:100%; height:220px; object-fit:cover; border-radius:.5rem; }
+  .gallery-img{ width:100%; height:auto; object-fit:cover; aspect-ratio: 3 / 4; border-radius:0; display:block; }
+  /* Gallery grid: 2 columns x 2 rows (portrait / standing rectangles) */
+  /* Use width scaling instead of transform to avoid layout gaps; keep full size on small screens */
+  .gallery-container{ display:grid; grid-template-columns: repeat(3, 1fr); gap:2.88rem; justify-items:stretch; width:72%; margin:0 auto; margin-bottom:0; }
+  @media(max-width:992px){ .gallery-container{ width:88%; grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width:576px){ .gallery-container{ grid-template-columns: 1fr; width:100%; } }
+  .gallery-item{ overflow:hidden; display:block; }
+  .gallery-item img{ width:100%; height:100%; object-fit:cover; display:block; }
     .btn-accent{ background: var(--accent); border-color: var(--accent); }
     .btn-accent:hover{ filter: brightness(0.95); }
   .price-img { max-width: 100%; border-radius: .5rem; box-shadow: 0 10px 25px rgba(0,0,0,.08); }
@@ -42,13 +52,15 @@
       /* Brand partners carousel */
     .band-black{background:#0b0b0b;color:#fff;text-align:center;padding:.85rem 0;text-transform:uppercase;letter-spacing:.08em;font-weight:800;}
     .brand-carousel .carousel-item{height:420px;}
-    @media (max-width: 768px){ .brand-carousel .carousel-item{height:280px;} }
+    @media (max-width: 768px){ .brand-carousel .carousel-item{height:420px;} }
     .brand-carousel .carousel-item img{width:100%;height:100%;object-fit:cover;}
     .brand-carousel .carousel-indicators [data-bs-target]{background-color:#fff;opacity:.5;}
     .brand-carousel .carousel-indicators .active{opacity:1;}
     .brand-carousel .carousel-control-prev-icon,.brand-carousel .carousel-control-next-icon{filter:invert(1) grayscale(1);}  
-      /* Instagram feed grid */
+    /* Instagram feed grid */
     .ig-section{background:#fff;}
+    /* Gallery section background (custom) */
+    .gallery-section{ background: #EBEBE1; }
     .ig-handle{font-weight:800;text-transform:uppercase;letter-spacing:.08em;text-decoration:underline;color:inherit}
     .ig-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
     @media(max-width:1200px){.ig-grid{grid-template-columns:repeat(4,1fr)}}
@@ -87,6 +99,37 @@
   html { scroll-behavior: smooth; }
   /* When scrolling to the footer, leave a margin equal to navbar height (~72px) */
   #footer { scroll-margin-top: 80px; }
+  /* Prices container for centered image */
+  .price-wrap{ background-color:#F0F0F0; display:flex; align-items:center; justify-content:center; }
+  .price-wrap img{ width:75%; height:75%; object-fit:contain; border-radius:0; box-shadow:none; display:block; }
+  /* Size chart has an independent wrapper so its sizing/layout can differ from prices */
+  .size-wrap{ background-color:#F0F0F0; display:flex; align-items:center; justify-content:center; }
+  .size-wrap img{ width:75%; height:75%; object-fit:contain; border-radius:0; box-shadow:none; display:block; }
+  /* Per-language price image styles */
+  /* English image: fixed pixel width cap to avoid overflow (use the max pixel value requested)
+    It remains responsive on small viewports via max-width:100% on the panel container. */
+  /* English image: responsive but capped at 75% of previous max (25% smaller) per request */
+  /* Halved max pixel caps so images are ~50% smaller */
+  /* English price image: larger cap so English price list appears bigger */
+  .price-image-en{ width:100%; max-width:700px; max-height:700px; height:auto; object-fit:contain; border-radius:0; box-shadow:none; display:block; }
+  /* Vietnamese images restored to original larger pixel cap */
+  .price-image-vi{ width:75%; max-width:886px; max-height:886px; height:auto; object-fit:contain; border-radius:0; box-shadow:none; display:block; filter: saturate(.95) contrast(1.02); }
+  /* Size chart image styles (smaller and independent from price images) */
+  .size-image-en{ width:100%; max-width:442px; max-height:442px; height:auto; object-fit:contain; border-radius:0; box-shadow:none; display:block; }
+  .size-image-vi{ width:100%; max-width:442px; max-height:442px; height:auto; object-fit:contain; border-radius:0; box-shadow:none; display:block; filter: saturate(.95) contrast(1.02); }
+  /* Panels that hold language-specific price images; each can have its own background color */
+  .price-panel{ width:100%; display:flex; align-items:center; justify-content:center; padding:2rem 0; overflow: visible; }
+  .price-panel-en{ background-color: #F0F0E4; }
+  .price-panel-vi{ background-color: #EBEBE1; }
+  /* Size chart panels reuse same spacing/behaviour but allow different background if desired */
+  .size-panel{ width:100%; display:flex; align-items:center; justify-content:center; padding:2rem 0; overflow: visible; }
+  .size-panel-en{ background-color: #FCFCF2; }  
+  .size-panel-vi{ background-color: #FCFCF2; }
+  /* Footer uses the same cream/nav background color for consistency */
+  footer { background: var(--nav-bg); color: #111827; }
+  footer a, footer .link-primary, footer .bi { color: inherit; text-decoration: none; }
+  /* subtle top border on light footer */
+  footer.border-top, footer .border-top { border-color: rgba(0,0,0,0.06); }
   </style>
 </head>
 <body data-language="en">
@@ -101,7 +144,7 @@
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link" href="#home" data-i18n="nav.home">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#prices" data-i18n="nav.prices">Prices</a></li>
-          <li class="nav-item"><a class="nav-link" href="#footer" data-i18n="nav.footer">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#footer" data-i18n="nav.contact">Contact</a></li>
         </ul>
         <div class="ms-lg-0 ms-auto lang-flags btn-group" role="group" aria-label="Language">
   <button class="btn btn-outline-dark btn-sm" data-lang="en" aria-label="English" title="English">
@@ -116,16 +159,16 @@
       </div>
     </div>
   </nav>
-
-  <!-- Hero / Home -->
-  <header id="home" class="hero-visual" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1600&auto=format&fit=crop');">
+  <header id="home" class="hero-visual" style="background-image: url('assets/images/z6918523260047_fe0e22767f13a8b77e42413ebbcb34e9.jpg');">
     <div class="container">
       <div class="hero-copy">
         <div class="hero-eyebrow" data-i18n="hero.eyebrow">Our Studio</div>
         <h1 class="hero-title" data-i18n="hero.title">Behind the Chair</h1>
         <div class="hero-kicker" data-i18n="hero.kicker">Hair Salon & Studio</div>
         <p class="hero-address mb-0" data-i18n="hero.addr1">317 Lý Tự Trọng, Phường Bến Thành, Quận 1,</p>
-        <p class="hero-address" data-i18n="hero.addr2">Hồ Chí Minh, Vietnam</p>
+        <p class="hero-address"><span data-i18n="hero.addr2">Hồ Chí Minh, Vietnam</span>
+          <img id="hero-flag" src="https://flagcdn.com/us.svg" width="20" alt="English" title="English" style="vertical-align:middle; margin-left:8px;">
+        </p>
         <div class="d-flex gap-2 mt-3">
           <a class="btn btn-accent text-white" href="https://www.facebook.com/juhair0923322333?mibextid=uzlsIk" target="_blank" rel="noopener"><i class="bi bi-calendar-event me-2"></i><span data-i18n="cta.bookFull">Book an appointment</span></a>
           <a class="btn btn-outline-light" href="#prices"><i class="bi bi-cash-coin me-2"></i><span data-i18n="cta.viewPrices">View prices</span></a>
@@ -135,18 +178,17 @@
   </header>
 
   <!-- Black separator bar between hero and content -->
-  <div class="hero-separator"></div>
+   <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="gallery.title">Price List</div></div></div>
 
   <!-- Shared gallery (will be injected on every page section) -->
-  <section class="section bg-light">
+  <section class="section gallery-section">
     <div class="container">
-      <h2 class="h4 mb-3" data-i18n="gallery.title">Gallery</h2>
       <div class="row g-3 gallery-container" data-gallery-target="home"></div>
     </div>
   </section>
 
   <!-- Brand partners -->
-  <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="brands.title">OUR TRUSTED BRAND PARTNERS</div></div></div>
+  <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="brands.titles">OUR TRUSTED BRAND PARTNERS</div></div></div>
 
   <div id="brandCarousel" class="carousel slide brand-carousel" data-bs-ride="carousel" data-bs-interval="4000">
     <div class="carousel-indicators" id="brand-indicators"></div>
@@ -159,71 +201,41 @@
     </button>
   </div>
 
-  <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="social.follow">FOLLOW US AT INSTAGRAM!</div></div></div>
 
-  <!-- Instagram feed grid -->
-  <section id="instagram" class="section ig-section">
-    <div class="container text-center">
-      <a id="ig-handle-link" class="ig-handle d-inline-block" href="https://instagram.com/ju.hairsalon" target="_blank" rel="noopener">@JU.HAIRSALON</a>
-      <p class="text-muted mt-2" data-i18n="insta.subtitle">We regularly update our hairstyles and news on our official Instagram channel.</p>
-      <div id="ig-grid" class="ig-grid mt-3"></div>
+  <!-- Black separator bar between hero and content -->
+   <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="brands.title">Price List</div></div></div>
+
+  <!-- Prices image: full-bleed. Place your image at assets/images/... -->
+  <section id="prices" class="section p-0">
+    <div class="container-fluid p-0 price-wrap" style="min-height:360px;">
+      <!-- Language-specific price images: show only the active language image -->
+        <div id="price-panel-en" class="price-panel price-panel-en" style="display:none;">
+          <img src="assets/images/z6918537879453_4a2bd9b6e7ed998fc064e5000d3c1bb8.jpg" alt="Price list (English)" id="price-image-en" class="price-image-en" aria-hidden="true" />
+        </div>
+        <div id="price-panel-vi" class="price-panel price-panel-vi" style="display:none;">
+          <img src="assets/images/banggia-ngang-01.png" alt="Bảng giá (Tiếng Việt)" id="price-image-vi" class="price-image-vi" aria-hidden="true" />
+        </div>
     </div>
   </section>
 
-  <!-- Prices -->
-  <main id="prices" class="section">
-    <div class="container">
-      <h2 class="display-6 fw-bold text-center mb-5" data-i18n="prices.title">Our Prices</h2>
-      <div class="row g-4 align-items-stretch">
-        <div class="col-lg-6">
-          <div class="card shadow-sm h-100 border-0">
-            <div class="card-body">
-              <p class="text-muted mb-4" data-i18n="prices.note">Transparent, simple tiers. Student discount on weekdays.</p>
-              <!-- OPTION A: Manual price table -->
-              <div id="price-table">
-                <div class="table-responsive">
-                  <table class="table table-striped align-middle mb-0">
-                    <thead>
-                      <tr>
-                        <th data-i18n="prices.service">Service</th>
-                        <th class="text-end" data-i18n="prices.price">Price</th>
-                      </tr>
-                    </thead>
-                    <tbody id="price-rows">
-                      <!-- Filled by JS from PRICE_DATA -->
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <!-- OPTION B: Single image (toggle in CONFIG below) -->
-              <div id="price-image-wrap" class="mt-3 d-none">
-                <img id="price-image" class="price-img" alt="Price list image" src="assets/pricelist.jpg" />
-              </div>
-            </div>
-          </div>
+
+
+  <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="brands.tit">Size Chart</div></div></div>
+  <section id="size-chart" class="section p-0">
+    <div class="container-fluid p-0 size-wrap" style="min-height:360px;">
+      <!-- Language-specific size chart images: show only the active language image -->
+        <div id="size-panel-en" class="size-panel size-panel-en" style="display:none;">
+          <img src="assets/images/hair-size-en.png" alt="Size chart (English)" id="size-image-en" class="size-image-en" aria-hidden="true" />
         </div>
-        <div class="col-lg-6">
-          <div class="card shadow-sm h-100 border-0">
-            <div class="card-body d-flex flex-column justify-content-between">
-              <div>
-                <h3 class="h5 mb-3" data-i18n="prices.popular">Popular Packages</h3>
-                <ul class="mb-4" id="popular-list">
-                  <!-- filled by JS -->
-                </ul>
-              </div>
-              <div class="text-end mt-auto">
-                <a class="btn btn-accent text-white px-4 py-2" href="https://www.facebook.com/juhair0923322333?mibextid=uzlsIk" target="_blank" rel="noopener"><i class="bi bi-magic me-2"></i><span data-i18n="cta.bookNow">Book now</span></a>
-              </div>
-            </div>
-          </div>
+        <div id="size-panel-vi" class="size-panel size-panel-vi" style="display:none;">
+          <img src="assets/images/hair-size-vn.png" alt="Bảng size (Tiếng Việt)" id="size-image-vi" class="size-image-vi" aria-hidden="true" />
         </div>
-      </div>
     </div>
-  </main>
-
-  <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="contact.blackbar">Where to find us!</div></div></div>
+  </section>
 
 
+   <!-- Black separator bar between hero and content -->
+  <div class="band-black"><div class="container"><div class="h5 m-0">Where To Find Us!</div></div></div>
   <!-- Footer -->
   <footer id="footer" class="py-4 border-top">
     <div class="container">
@@ -270,7 +282,7 @@
     // ====== CONFIG ======
     const CONFIG = {
       LANGUAGE_DEFAULT: 'en', // 'en' or 'vi'
-      USE_PRICE_IMAGE: false,  // true => show image instead of table
+      USE_PRICE_IMAGE: true,   // true => show image instead of table (image shown by default)
       HOTLINE: '0985678988',
       ADDRESS: '317 Lý Tự Trọng, Phường Bến Thành, Quận 1, Hồ Chí Minh, Vietnam',
       MAP_QUERY: '317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam',
@@ -280,21 +292,19 @@
 
     // ====== SAMPLE CONTENT DATA ======
     const GALLERY = [
-      'https://images.unsplash.com/photo-1510414696678-2415ad8474aa?q=80&w=1200&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?q=80&w=1200&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=1200&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1516880711640-ef7db81be3e6?q=80&w=1200&auto=format&fit=crop'
+      'assets/images/Gallery/1.5.jpg',
+      'assets/images/Gallery/2.jpg',
+      'assets/images/Gallery/1.2.jpg',
+      'assets/images/Gallery/1.4.jpg',
+      'assets/images/Gallery/1.3.jpg',
+      'assets/images/Gallery/1.6.jpg'
     ];
 
     const BRANDS = [
-      // Replace these with your brand/partner images (1200x600 recommended)
-      'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1600&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1510414696678-2415ad8474aa?q=80&w=1600&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=1600&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1516880711640-ef7db81be3e6?q=80&w=1600&auto=format&fit=crop'
+      'assets/images/brand/1.jpg',
+      'assets/images/brand/2.jpg',
+      'assets/images/brand/3.jpg',
+      'assets/images/brand/4.jpg',
     ];
 
     const INSTAGRAM = { HANDLE: 'ju.hairsalon', URL: 'https://instagram.com/ju.hairsalon' };
@@ -335,12 +345,14 @@
         'cta.viewPrices': 'View prices',
         'cta.bookNow': 'Book now',
         'hero.eyebrow': 'Our Studio',
-        'hero.title': 'Behind the Chair',
-        'hero.kicker': 'Hair Salon & Studio',
+        'hero.title': 'Ju Hair',
+        'hero.kicker': 'Salon & Studio',
         'hero.addr1': '317 Lý Tự Trọng, Phường Bến Thành, Quận 1,',
         'hero.addr2': 'Ho Chi Minh City',
         'gallery.title': 'Gallery',
-        'brands.title': 'Our Trusted Brand Partners',
+        'brands.title': 'Price List',
+        'brands.titles': 'Our Trusted Brand Partners',
+        'brands.tit': 'Size Chart',
         'social.follow': 'Follow us at Instagram!',
         'insta.subtitle': 'We regularly update our hairstyles and news on our official Instagram channel.',
         'prices.title': 'Our Prices',
@@ -377,12 +389,14 @@
         'cta.viewPrices': 'Xem giá',
         'cta.bookNow': 'Đặt ngay',
         'hero.eyebrow': 'Studio của chúng tôi',
-        'hero.title': 'Behind the Chair',
-        'hero.kicker': 'Hair Salon & Studio',
+        'hero.title': 'Ju Hair',
+        'hero.kicker': 'Salon & Studio',
         'hero.addr1': '317 Lý Tự Trọng, Phường Bến Thành, Quận 1,',
         'hero.addr2': 'TP. Hồ Chí Minh, Việt Nam',
-        'gallery.title': 'Hình ảnh',
-        'brands.title': 'Đối tác thương hiệu uy tín',
+        'gallery.title': 'Gallery',
+        'brands.title': 'Bảng Giá',
+        'brands.titles': 'Đối tác thương hiệu đáng tin cậy',
+        'brands.tit': 'Bảng Size Tóc',
         'social.follow': 'Theo dõi chúng tôi trên Instagram!',
         'insta.subtitle': 'Chúng tôi thường xuyên cập nhật kiểu tóc và tin mới trên kênh Instagram chính thức.',
         'prices.title': 'Bảng giá',
@@ -420,20 +434,38 @@
         if(I18N[lang] && I18N[lang][key]) el.textContent = I18N[lang][key];
       });
       // Price rows re-render for names
-      renderPrices(lang);
+  renderPrices(lang);
+  // Update language-specific price images
+  if (typeof updatePriceImages === 'function') updatePriceImages(lang);
+  if (typeof updateSizeImages === 'function') updateSizeImages(lang);
+  // Update hero flag to match language (if present)
+  try{
+    const heroFlag = document.getElementById('hero-flag');
+    if(heroFlag){
+      if(lang === 'vi'){
+        heroFlag.src = 'https://flagcdn.com/vn.svg';
+        heroFlag.alt = 'Tiếng Việt';
+        heroFlag.title = 'Tiếng Việt';
+      } else {
+        heroFlag.src = 'https://flagcdn.com/vn.svg';
+        heroFlag.alt = 'English';
+        heroFlag.title = 'English';
+      }
+    }
+  }catch(e){ /* ignore */ }
     }
 
     function renderGallery(){
       document.querySelectorAll('.gallery-container').forEach(container => {
         container.innerHTML = '';
         GALLERY.forEach((src, idx) => {
-          const col = document.createElement('div');
-          col.className = 'col-6 col-md-4';
-          col.innerHTML = `
+          const item = document.createElement('div');
+          item.className = 'gallery-item';
+          item.innerHTML = `
             <a href="${src}" target="_blank" rel="noopener" class="d-block">
               <img class="gallery-img" src="${src}" alt="Gallery image ${idx+1}" />
             </a>`;
-          container.appendChild(col);
+          container.appendChild(item);
         });
       });
     }
@@ -478,29 +510,78 @@
     function renderPrices(lang){
       const priceTable = document.getElementById('price-table');
       const priceImgWrap = document.getElementById('price-image-wrap');
-      if(CONFIG.USE_PRICE_IMAGE){
-        priceTable.classList.add('d-none');
-        priceImgWrap.classList.remove('d-none');
+      // Defensive: some markup variants use a single image element (id="price-image")
+      // while older code expects wrappers (#price-image-wrap / #price-table). Avoid
+      // throwing when elements are missing so language switching still works.
+      if (CONFIG.USE_PRICE_IMAGE) {
+        if (priceTable && priceTable.classList) priceTable.classList.add('d-none');
+        if (priceImgWrap && priceImgWrap.classList) priceImgWrap.classList.remove('d-none');
       } else {
-        priceTable.classList.remove('d-none');
-        priceImgWrap.classList.add('d-none');
+        if (priceTable && priceTable.classList) priceTable.classList.remove('d-none');
+        if (priceImgWrap && priceImgWrap.classList) priceImgWrap.classList.add('d-none');
         const rows = document.getElementById('price-rows');
-        rows.innerHTML = '';
-        PRICE_DATA.forEach(item => {
-          const tr = document.createElement('tr');
-          const name = (lang === 'vi') ? item.vi : item.en;
-          tr.innerHTML = `<td>${name}</td><td class="text-end">${item.price}</td>`;
-          rows.appendChild(tr);
-        });
+        if (rows) {
+          rows.innerHTML = '';
+          PRICE_DATA.forEach(item => {
+            const tr = document.createElement('tr');
+            const name = (lang === 'vi') ? item.vi : item.en;
+            tr.innerHTML = `<td>${name}</td><td class="text-end">${item.price}</td>`;
+            rows.appendChild(tr);
+          });
+        }
         // Popular list
         const list = document.getElementById('popular-list');
-        list.innerHTML = '';
-        (POPULAR[lang] || POPULAR.en).forEach(p => {
-          const li = document.createElement('li');
-          li.textContent = p;
-          list.appendChild(li);
-        });
+        if (list) {
+          list.innerHTML = '';
+          (POPULAR[lang] || POPULAR.en).forEach(p => {
+            const li = document.createElement('li');
+            li.textContent = p;
+            list.appendChild(li);
+          });
+        }
       }
+    }
+
+    // Show/hide the per-language price panels (panel includes background + image)
+    function updatePriceImages(lang){
+      try{
+        const panelEn = document.getElementById('price-panel-en');
+        const panelVi = document.getElementById('price-panel-vi');
+        const imgEn = document.getElementById('price-image-en');
+        const imgVi = document.getElementById('price-image-vi');
+        if(lang === 'vi'){
+          if(panelEn) panelEn.style.display = 'none';
+          if(panelVi) panelVi.style.display = 'flex';
+          if(imgEn) imgEn.setAttribute('aria-hidden','true');
+          if(imgVi) imgVi.setAttribute('aria-hidden','false');
+        } else {
+          if(panelVi) panelVi.style.display = 'none';
+          if(panelEn) panelEn.style.display = 'flex';
+          if(imgVi) imgVi.setAttribute('aria-hidden','true');
+          if(imgEn) imgEn.setAttribute('aria-hidden','false');
+        }
+      }catch(e){ console.warn('updatePriceImages failed', e); }
+    }
+
+    // Show/hide the per-language size chart panels (mirrors price panels)
+    function updateSizeImages(lang){
+      try{
+        const panelEn = document.getElementById('size-panel-en');
+        const panelVi = document.getElementById('size-panel-vi');
+        const imgEn = document.getElementById('size-image-en');
+        const imgVi = document.getElementById('size-image-vi');
+        if(lang === 'vi'){
+          if(panelEn) panelEn.style.display = 'none';
+          if(panelVi) panelVi.style.display = 'flex';
+          if(imgEn) imgEn.setAttribute('aria-hidden','true');
+          if(imgVi) imgVi.setAttribute('aria-hidden','false');
+        } else {
+          if(panelVi) panelVi.style.display = 'none';
+          if(panelEn) panelEn.style.display = 'flex';
+          if(imgVi) imgVi.setAttribute('aria-hidden','true');
+          if(imgEn) imgEn.setAttribute('aria-hidden','false');
+        }
+      }catch(e){ console.warn('updateSizeImages failed', e); }
     }
 
     function initBasics(){
@@ -530,19 +611,33 @@
     }
 
     function initLanguage(){
-      const saved = localStorage.getItem('siteLang');
-      const startLang = saved || ((navigator.language || '').startsWith('vi') ? 'vi' : CONFIG.LANGUAGE_DEFAULT);
-      const btns = document.querySelectorAll('.lang-flags [data-lang]');
-      const setActive = (lang)=> btns.forEach(b=> b.classList.toggle('active', b.getAttribute('data-lang')===lang));
-      const setLang = (lang)=>{ applyLanguage(lang); setActive(lang); localStorage.setItem('siteLang', lang); document.documentElement.setAttribute('lang', lang); };
-      setLang(startLang);
-      btns.forEach(btn=> btn.addEventListener('click', (e)=>{ e.preventDefault(); setLang(btn.getAttribute('data-lang')); }));
+      try {
+        const saved = localStorage.getItem('siteLang');
+        const startLang = saved || ((navigator.language || '').startsWith('vi') ? 'vi' : CONFIG.LANGUAGE_DEFAULT);
+        const btns = Array.from(document.querySelectorAll('.lang-flags [data-lang]'));
+        if(!btns.length) return; // no language buttons present
+        const setActive = (lang)=> btns.forEach(b=> b.classList.toggle('active', (b.dataset && b.dataset.lang) ? b.dataset.lang === lang : b.getAttribute('data-lang') === lang));
+        const setLang = (lang)=>{
+          try{
+            applyLanguage(lang);
+            setActive(lang);
+            localStorage.setItem('siteLang', lang);
+            document.documentElement.setAttribute('lang', lang);
+            document.body.setAttribute('data-language', lang);
+          }catch(err){ console.warn('setLang error', err); }
+        };
+        setLang(startLang);
+        btns.forEach(btn=> btn.addEventListener('click', (e)=>{ e.preventDefault(); const lang = (btn.dataset && btn.dataset.lang) ? btn.dataset.lang : btn.getAttribute('data-lang'); setLang(lang); }));
+      } catch(ex){ console.error('initLanguage failed', ex); }
     }
 
     function initBooking(){
-      document.getElementById('submit-booking').addEventListener('click', () => {
+      // Booking UI is optional (moved to Facebook). Guard missing elements to avoid runtime errors.
+      const submitBtn = document.getElementById('submit-booking');
+      if(!submitBtn) return;
+      submitBtn.addEventListener('click', () => {
         const form = document.getElementById('booking-form');
-        if(!form.checkValidity()) { form.reportValidity(); return; }
+        if(!form || !form.checkValidity()) { form && form.reportValidity && form.reportValidity(); return; }
         const data = Object.fromEntries(new FormData(form).entries());
         // mailto fallback string
         const subject = encodeURIComponent('Booking request');
