@@ -51,8 +51,16 @@
       .hero-separator{ height:56px; background:#000; width:100%; }
       /* Brand partners carousel */
     .band-black{background:#0b0b0b;color:#fff;text-align:center;padding:.85rem 0;text-transform:uppercase;letter-spacing:.08em;font-weight:800;}
-    .brand-carousel .carousel-item{height:420px;}
-    @media (max-width: 768px){ .brand-carousel .carousel-item{height:420px;} }
+    .brand-carousel .carousel-item{height:721px;}
+    .brand-carousel .carousel-inner{width:100vw;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);}
+    /* Mobile carousel - smaller height for better mobile experience */
+    @media (max-width: 768px){ 
+      .brand-carousel .carousel-item{height:280px;} 
+    }
+    /* Tablet size for medium screens */
+    @media (max-width: 992px) and (min-width: 769px){ 
+      .brand-carousel .carousel-item{height:400px;} 
+    }
     .brand-carousel .carousel-item img{width:100%;height:100%;object-fit:cover;}
     .brand-carousel .carousel-indicators [data-bs-target]{background-color:#fff;opacity:.5;}
     .brand-carousel .carousel-indicators .active{opacity:1;}
@@ -87,6 +95,21 @@
 
     /* Smooth invert */
     transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  }
+
+  /* Mobile responsive adjustments for booking button */
+  @media (max-width: 768px) {
+    #zFwQon {
+      width: 35%;              /* Wider on mobile for better proportion */
+      margin: 0 1rem 0 0;      /* Add right margin for spacing */
+    }
+  }
+
+  @media (max-width: 576px) {
+    #zFwQon {
+      width: 45%;              /* Even wider on small mobile screens */
+      margin: 0 1.5rem 0 0;    /* More right margin on smallest screens */
+    }
   }
 
   #zFwQon:hover,
@@ -125,6 +148,10 @@
   .size-panel{ width:100%; display:flex; align-items:center; justify-content:center; padding:2rem 0; overflow: visible; }
   .size-panel-en{ background-color: #FCFCF2; }  
   .size-panel-vi{ background-color: #FCFCF2; }
+  /* Mobile Vietnamese price images container - center alignment */
+  #price-mobile-vi{ display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  /* Mobile Vietnamese price images - full width override */
+  #price-mobile-vi img{ width:100% !important; max-width:100% !important; }
   /* Footer uses the same cream/nav background color for consistency */
   footer { background: var(--nav-bg); color: #111827; }
   footer a, footer .link-primary, footer .bi { color: inherit; text-decoration: none; }
@@ -202,18 +229,26 @@
   </div>
 
 
+
   <!-- Black separator bar between hero and content -->
    <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="brands.title">Price List</div></div></div>
 
   <!-- Prices image: full-bleed. Place your image at assets/images/... -->
   <section id="prices" class="section p-0">
-    <div class="container-fluid p-0 price-wrap" style="min-height:360px;">
+    <div class="container-fluid p-0 price-wrap" style="min-height:0px;">
       <!-- Language-specific price images: show only the active language image -->
         <div id="price-panel-en" class="price-panel price-panel-en" style="display:none;">
           <img src="assets/images/z6918537879453_4a2bd9b6e7ed998fc064e5000d3c1bb8.jpg" alt="Price list (English)" id="price-image-en" class="price-image-en" aria-hidden="true" />
         </div>
         <div id="price-panel-vi" class="price-panel price-panel-vi" style="display:none;">
-          <img src="assets/images/banggia-ngang-01.png" alt="Bảng giá (Tiếng Việt)" id="price-image-vi" class="price-image-vi" aria-hidden="true" />
+          <!-- Desktop Vietnamese price image -->
+          <img src="assets/images/banggia-ngang-01.png" alt="Bảng giá (Tiếng Việt)" id="price-image-vi-desktop" class="price-image-vi d-none d-md-block" aria-hidden="true" />
+          <!-- Mobile Vietnamese price images -->
+          <div id="price-mobile-vi" class="d-block d-md-none">
+            <img src="assets/images/price_mobile_1.png" alt="Bảng giá di động 1 (Tiếng Việt)" class="price-image-vi" />
+            <img src="assets/images/price_mobile_2.png" alt="Bảng giá di động 2 (Tiếng Việt)" class="price-image-vi" />
+            <img src="assets/images/price_mobile_3.png" alt="Bảng giá di động 3 (Tiếng Việt)" class="price-image-vi" />
+          </div>
         </div>
     </div>
   </section>
@@ -222,7 +257,7 @@
 
   <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="brands.tit">Size Chart</div></div></div>
   <section id="size-chart" class="section p-0">
-    <div class="container-fluid p-0 size-wrap" style="min-height:360px;">
+    <div class="container-fluid p-0 size-wrap" style="min-height:0px;">
       <!-- Language-specific size chart images: show only the active language image -->
         <div id="size-panel-en" class="size-panel size-panel-en" style="display:none;">
           <img src="assets/images/hair-size-en.png" alt="Size chart (English)" id="size-image-en" class="size-image-en" aria-hidden="true" />
@@ -255,11 +290,9 @@
 
               <div class="fs-5.5"><i class="bi bi-geo-alt me-3"></i><span id="address">317 Lý Tự Trọng, Phường Bến Thành, Quận 1, Hồ Chí Minh, Vietnam</span></div>
               <div class="fs-5.5"><i class="bi bi-telephone me-3"></i><a id="hotline" href="tel:0985678988">0985678988</a></div>
-              <div class="d-flex gap-4 mt-3">
-                <a id="map-link" class="link-primary fs-6" target="_blank" rel="noopener" href="https://maps.google.com/?q=317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam"><i class="bi bi-map me-2"></i><span data-i18n="contact.openMap">Open in Google Maps</span></a>
-                <a id="facebook-link" class="link-primary fs-4" href="https://www.facebook.com/juhair0923322333?mibextid=uzlsIk" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                <a class="link-primary fs-4" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                <a class="link-primary fs-4" href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+              <div class="d-flex gap-4 mt-3 align-items-center">
+                <a id="map-link" class="link-primary fs-4.5" target="_blank" rel="noopener" href="https://maps.google.com/?q=317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam"><i class="bi bi-map me-2"></i><span data-i18n="contact.openMap">Open in Google Maps</span></a>
+                <a id="facebook-link" class="link-primary fs-5" href="https://www.facebook.com/juhair0923322333?mibextid=uzlsIk" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
               </div>
               <div class="fs-5.5">© <span id="year"></span> <span data-i18n="brand">JU HAIR SALON</span></div>
             </div>
@@ -304,7 +337,6 @@
       'assets/images/brand/1.jpg',
       'assets/images/brand/2.jpg',
       'assets/images/brand/3.jpg',
-      'assets/images/brand/4.jpg',
     ];
 
     const INSTAGRAM = { HANDLE: 'ju.hairsalon', URL: 'https://instagram.com/ju.hairsalon' };
@@ -548,16 +580,26 @@
         const panelEn = document.getElementById('price-panel-en');
         const panelVi = document.getElementById('price-panel-vi');
         const imgEn = document.getElementById('price-image-en');
-        const imgVi = document.getElementById('price-image-vi');
+        const imgViDesktop = document.getElementById('price-image-vi-desktop');
+        const mobileViContainer = document.getElementById('price-mobile-vi');
+        
         if(lang === 'vi'){
           if(panelEn) panelEn.style.display = 'none';
           if(panelVi) panelVi.style.display = 'flex';
           if(imgEn) imgEn.setAttribute('aria-hidden','true');
-          if(imgVi) imgVi.setAttribute('aria-hidden','false');
+          if(imgViDesktop) imgViDesktop.setAttribute('aria-hidden','false');
+          if(mobileViContainer) {
+            const mobileImgs = mobileViContainer.querySelectorAll('img');
+            mobileImgs.forEach(img => img.setAttribute('aria-hidden','false'));
+          }
         } else {
           if(panelVi) panelVi.style.display = 'none';
           if(panelEn) panelEn.style.display = 'flex';
-          if(imgVi) imgVi.setAttribute('aria-hidden','true');
+          if(imgViDesktop) imgViDesktop.setAttribute('aria-hidden','true');
+          if(mobileViContainer) {
+            const mobileImgs = mobileViContainer.querySelectorAll('img');
+            mobileImgs.forEach(img => img.setAttribute('aria-hidden','true'));
+          }
           if(imgEn) imgEn.setAttribute('aria-hidden','false');
         }
       }catch(e){ console.warn('updatePriceImages failed', e); }
