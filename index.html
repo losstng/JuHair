@@ -1,718 +1,541 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="vi">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ju Hair Salon</title>
-  <!-- Bootstrap 5 (no build) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ju Hair Salon | Premium Hair Studio</title>
   <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
-  <style>
-    /* Minimal custom styles */
-    :root { --brand: #111827; --accent: #e11d48; --nav-bg:#ece2d1; }
-    .nav-cream{ background: var(--nav-bg); border-bottom:1px solid rgba(0,0,0,.08); }
-    .navbar-brand{ text-transform: uppercase; letter-spacing:.35em; font-weight:700; font-size: .95rem; line-height:1.1; }
-    /* Gallery section background (custom) */
-    .gallery-section{ background: #EBEBE1; padding: 1.25rem 0; }
-    
-    .navbar-nav .nav-link{ color:#111; padding:.75rem 1rem; }
-    .navbar-nav .nav-link:hover{ color:#000; }
-    .navbar-nav .nav-link.active{ font-weight:600; color:#111 !important; border-bottom:3px solid currentColor; border-radius:0; }
-    .brand-gradient { background: linear-gradient(135deg, #111827 0%, #0f172a 50%, #111827 100%); }
-    .hero { color: #fff; padding: 6rem 0; }
-    .section { padding: 4rem 0; }
-  .gallery-img{ width:100%; height:auto; object-fit:cover; aspect-ratio: 3 / 4; border-radius:0; display:block; }
-  /* Gallery grid: 2 columns x 2 rows (portrait / standing rectangles) */
-  /* Use width scaling instead of transform to avoid layout gaps; keep full size on small screens */
-  .gallery-container{ display:grid; grid-template-columns: repeat(3, 1fr); gap:2.88rem; justify-items:stretch; width:72%; margin:0 auto; margin-bottom:0; }
-  @media(max-width:992px){ .gallery-container{ width:88%; grid-template-columns: repeat(2, 1fr); } }
-  @media(max-width:576px){ .gallery-container{ grid-template-columns: 1fr; width:100%; } }
-  .gallery-item{ overflow:hidden; display:block; }
-  .gallery-item img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .btn-accent{ background: var(--accent); border-color: var(--accent); }
-    .btn-accent:hover{ filter: brightness(0.95); }
-  .price-img { max-width: 100%; border-radius: .5rem; box-shadow: 0 10px 25px rgba(0,0,0,.08); }
-  #prices .card { background: #fff; border-radius: 1rem; }
-  #prices .card-body { padding: 2rem 2rem 1.5rem 2rem; }
-  #prices .table { font-size: 1.08rem; }
-  #prices .btn-accent { font-size: 1.1rem; }
-    footer a { text-decoration: none; }
-    .lang-toggle .btn{ padding: .25rem .6rem; }
-
-    /* New hero style to match screenshot layout */
-    .hero-visual{ position:relative; min-height:72vh; background-size:cover; background-position:center; }
-    .hero-visual::before{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,.45), rgba(0,0,0,.25)); }
-    .hero-copy{ position:relative; color:#fff; padding: 7rem 0; max-width: 780px; }
-    .hero-eyebrow{ text-transform:uppercase; letter-spacing:.25em; opacity:.95; font-weight:600; }
-    .hero-title{ text-transform:uppercase; letter-spacing:.04em; font-weight:800; line-height:1.05; font-size:clamp(2.5rem,6vw,4.5rem); }
-    .hero-kicker{ text-transform:uppercase; letter-spacing:.6em; font-weight:600; margin-top:.25rem; }
-    .hero-address{ text-transform:uppercase; font-weight:700; margin-top:1.5rem; }
-      .hero-separator{ height:56px; background:#000; width:100%; }
-      /* Brand partners carousel */
-    .band-black{background:#0b0b0b;color:#fff;text-align:center;padding:.85rem 0;text-transform:uppercase;letter-spacing:.08em;font-weight:800;}
-    .brand-carousel .carousel-item{height:721px;}
-    .brand-carousel .carousel-inner{width:100vw;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);}
-    /* Mobile carousel - smaller height for better mobile experience */
-    @media (max-width: 768px){ 
-      .brand-carousel .carousel-item{height:280px;} 
-    }
-    /* Tablet size for medium screens */
-    @media (max-width: 992px) and (min-width: 769px){ 
-      .brand-carousel .carousel-item{height:400px;} 
-    }
-    .brand-carousel .carousel-item img{width:100%;height:100%;object-fit:cover;}
-    .brand-carousel .carousel-indicators [data-bs-target]{background-color:#fff;opacity:.5;}
-    .brand-carousel .carousel-indicators .active{opacity:1;}
-    .brand-carousel .carousel-control-prev-icon,.brand-carousel .carousel-control-next-icon{filter:invert(1) grayscale(1);}  
-    /* Instagram feed grid */
-    .ig-section{background:#fff;}
-    /* Gallery section background (custom) */
-    .gallery-section{ background: #EBEBE1; }
-    .ig-handle{font-weight:800;text-transform:uppercase;letter-spacing:.08em;text-decoration:underline;color:inherit}
-    .ig-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
-    @media(max-width:1200px){.ig-grid{grid-template-columns:repeat(4,1fr)}}
-    @media(max-width:992px){.ig-grid{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:576px){.ig-grid{grid-template-columns:repeat(2,1fr)}}
-    .ig-card{overflow:hidden;border-radius:.5rem}
-    .ig-card img{width:100%;height:100%;object-fit:cover;transition:transform .25s ease}
-    .ig-card:hover img{transform:scale(1.03)}
-      .lang-flags .btn.active{background:#111;color:#fff;border-color:#111}
-
-  /* Target just this button */
-  #zFwQon {
-    /* Sizing & alignment */
-    width: 20%;
-    display: block;              /* ignores parent text-align:center */
-    margin: 0 auto 0 0;          /* pushes left in flex/grid/normal flow */
-    justify-self: start;         /* if parent is CSS Grid */
-
-    /* Colors (default = black fill, white text) */
-    background-color: #000;
-    color: #fff;
-    border: 1px solid #000;
-    text-decoration: none;
-
-    /* Smooth invert */
-    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
-  }
-
-  /* Mobile responsive adjustments for booking button */
-  @media (max-width: 768px) {
-    #zFwQon {
-      width: 35%;              /* Wider on mobile for better proportion */
-      margin: 0 1rem 0 0;      /* Add right margin for spacing */
-    }
-  }
-
-  @media (max-width: 576px) {
-    #zFwQon {
-      width: 45%;              /* Even wider on small mobile screens */
-      margin: 0 1.5rem 0 0;    /* More right margin on smallest screens */
-    }
-  }
-
-  #zFwQon:hover,
-  #zFwQon:focus-visible {
-    background-color: #fff;      /* invert fill */
-    color: #000 !important;      /* ensure text is black */
-    border-color: #000;          /* keep a clear outline */
-  }
-  /* Smooth scroll and offset so anchored footer isn't hidden by sticky navbar */
-  html { scroll-behavior: smooth; }
-  /* When scrolling to the footer, leave a margin equal to navbar height (~72px) */
-  #footer { scroll-margin-top: 80px; }
-  /* Prices container for centered image */
-  .price-wrap{ background-color:#F0F0F0; display:flex; align-items:center; justify-content:center; }
-  .price-wrap img{ width:75%; height:75%; object-fit:contain; border-radius:0; box-shadow:none; display:block; }
-  /* Size chart has an independent wrapper so its sizing/layout can differ from prices */
-  .size-wrap{ background-color:#F0F0F0; display:flex; align-items:center; justify-content:center; }
-  .size-wrap img{ width:75%; height:75%; object-fit:contain; border-radius:0; box-shadow:none; display:block; }
-  /* Per-language price image styles */
-  /* English image: fixed pixel width cap to avoid overflow (use the max pixel value requested)
-    It remains responsive on small viewports via max-width:100% on the panel container. */
-  /* English image: responsive but capped at 75% of previous max (25% smaller) per request */
-  /* Halved max pixel caps so images are ~50% smaller */
-  /* English price image: larger cap so English price list appears bigger */
-  .price-image-en{ width:100%; max-width:700px; max-height:700px; height:auto; object-fit:contain; border-radius:0; box-shadow:none; display:block; }
-  /* Vietnamese images restored to original larger pixel cap */
-  .price-image-vi{ width:75%; max-width:886px; max-height:886px; height:auto; object-fit:contain; border-radius:0; box-shadow:none; display:block; filter: saturate(.95) contrast(1.02); }
-  /* Size chart image styles (smaller and independent from price images) */
-  .size-image-en{ width:100%; max-width:442px; max-height:442px; height:auto; object-fit:contain; border-radius:0; box-shadow:none; display:block; }
-  .size-image-vi{ width:100%; max-width:442px; max-height:442px; height:auto; object-fit:contain; border-radius:0; box-shadow:none; display:block; filter: saturate(.95) contrast(1.02); }
-  /* Panels that hold language-specific price images; each can have its own background color */
-  .price-panel{ width:100%; display:flex; align-items:center; justify-content:center; padding:2rem 0; overflow: visible; }
-  .price-panel-en{ background-color: #F0F0E4; }
-  .price-panel-vi{ background-color: #EBEBE1; }
-  /* Size chart panels reuse same spacing/behaviour but allow different background if desired */
-  .size-panel{ width:100%; display:flex; align-items:center; justify-content:center; padding:2rem 0; overflow: visible; }
-  .size-panel-en{ background-color: #FCFCF2; }  
-  .size-panel-vi{ background-color: #FCFCF2; }
-  /* Mobile Vietnamese price images container - center alignment */
-  #price-mobile-vi{ display:flex; flex-direction:column; align-items:center; justify-content:center; }
-  /* Mobile Vietnamese price images - full width override */
-  #price-mobile-vi img{ width:100% !important; max-width:100% !important; }
-  /* Footer uses the same cream/nav background color for consistency */
-  footer { background: var(--nav-bg); color: #111827; }
-  footer a, footer .link-primary, footer .bi { color: inherit; text-decoration: none; }
-  /* subtle top border on light footer */
-  footer.border-top, footer .border-top { border-color: rgba(0,0,0,0.06); }
-  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-language="en">
-  <!-- Nav -->
-  <nav class="navbar navbar-expand-lg nav-cream sticky-top shadow-sm">
-    <div class="container">
-      <a class="navbar-brand" href="#home" data-i18n="brand">JU HAIR SALON</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="nav">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="#home" data-i18n="nav.home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#prices" data-i18n="nav.prices">Prices</a></li>
-          <li class="nav-item"><a class="nav-link" href="#footer" data-i18n="nav.contact">Contact</a></li>
-        </ul>
-        <div class="ms-lg-0 ms-auto lang-flags btn-group" role="group" aria-label="Language">
-  <button class="btn btn-outline-dark btn-sm" data-lang="en" aria-label="English" title="English">
-    <img src="https://flagcdn.com/us.svg" width="20" alt="English" style="vertical-align:middle; margin-right:4px;">
-    English
-  </button>
-  <button class="btn btn-outline-dark btn-sm" data-lang="vi" aria-label="Tiếng Việt" title="Tiếng Việt">
-    <img src="https://flagcdn.com/vn.svg" width="20" alt="Tiếng Việt" style="vertical-align:middle; margin-right:4px;">
-    Tiếng Việt
-  </button>
-</div>
+
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="logo">Ju Hair Salon</a>
+      <div class="mobile-toggle">
+        <i class="bi bi-list"></i>
       </div>
-    </div>
-  </nav>
-  <header id="home" class="hero-visual" style="background-image: url('assets/images/z6918523260047_fe0e22767f13a8b77e42413ebbcb34e9.jpg');">
-    <div class="container">
-      <div class="hero-copy">
-        <div class="hero-eyebrow" data-i18n="hero.eyebrow">Our Studio</div>
-        <h1 class="hero-title" data-i18n="hero.title">Behind the Chair</h1>
-        <div class="hero-kicker" data-i18n="hero.kicker">Hair Salon & Studio</div>
-        <p class="hero-address mb-0" >Open - Close: 9:30 - 20:30</p>
-        <p class="hero-address mb-0" data-i18n="hero.addr1">317 Lý Tự Trọng, Phường Bến Thành, Quận 1,</p>
-        <p class="hero-address"><span data-i18n="hero.addr2">Hồ Chí Minh, Vietnam</span>
-          <img id="hero-flag" src="https://flagcdn.com/us.svg" width="20" alt="English" title="English" style="vertical-align:middle; margin-left:8px;">
-        </p>
-        <div class="d-flex gap-2 mt-3">
-          <a class="btn btn-accent text-white" href="https://www.facebook.com/juhair0923322333?mibextid=uzlsIk" target="_blank" rel="noopener"><i class="bi bi-calendar-event me-2"></i><span data-i18n="cta.bookFull">Book an appointment</span></a>
-          <a class="btn btn-outline-light" href="#prices"><i class="bi bi-cash-coin me-2"></i><span data-i18n="cta.viewPrices">View prices</span></a>
-        </div>
-      </div>
+      <nav class="nav-menu">
+        <a href="#home" class="nav-link">Trang chủ</a>
+
+        <a href="#menu" class="nav-link">Bảng giá</a>
+        <a href="#gallery" class="nav-link">Thư viện</a>
+        <a href="#contact" class="nav-link btn-link">Liên hệ</a>
+      </nav>
     </div>
   </header>
 
-  <!-- Black separator bar between hero and content -->
-   <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="gallery.title">Price List</div></div></div>
-
-  <!-- Shared gallery (will be injected on every page section) -->
-  <section class="section gallery-section">
-    <div class="container">
-      <div class="row g-3 gallery-container" data-gallery-target="home"></div>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-bg-single">
+      <img src="assets/images/z6918523260047_fe0e22767f13a8b77e42413ebbcb34e9.jpg" alt="Ju Hair Salon">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Ju Hair Salon</span>
+      <p class="hero-subtitle">Nơi vẻ đẹp mái tóc của bạn được thăng hoa</p>
+      <a href="#menu" class="btn btn-primary">Xem Dịch Vụ</a>
     </div>
   </section>
 
-  <!-- Brand partners -->
-  <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="brands.titles">OUR TRUSTED BRAND PARTNERS</div></div></div>
-
-  <div id="brandCarousel" class="carousel slide brand-carousel" data-bs-ride="carousel" data-bs-interval="4000">
-    <div class="carousel-indicators" id="brand-indicators"></div>
-    <div class="carousel-inner" id="brand-slides"></div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#brandCarousel" data-bs-slide="prev" aria-label="Previous">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#brandCarousel" data-bs-slide="next" aria-label="Next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    </button>
-  </div>
 
 
+  <!-- Services / Menu Section -->
+  <section id="menu" class="menu-section">
+    <div class="container">
+      <h2 class="section-title">Dịch Vụ & Bảng Giá</h2>
+      <p class="section-subtitle">Chất lượng cao cấp - Minh bạch - Tận tâm</p>
 
-  <!-- Black separator bar between hero and content -->
-   <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="brands.title">Price List</div></div></div>
+      <!-- Menu Tabs -->
+      <div class="menu-tabs">
+        <button class="menu-tab-btn active" data-target="cut">Cắt & Tạo Kiểu</button>
+        <button class="menu-tab-btn" data-target="perm">Uốn & Duỗi</button>
+        <button class="menu-tab-btn" data-target="dye">Nhuộm & Tẩy</button>
+        <button class="menu-tab-btn" data-target="recovery">Phục Hồi</button>
+      </div>
 
-  <!-- Prices image: full-bleed. Place your image at assets/images/... -->
-  <section id="prices" class="section p-0">
-    <div class="container-fluid p-0 price-wrap" style="min-height:0px;">
-      <!-- Language-specific price images: show only the active language image -->
-        <div id="price-panel-en" class="price-panel price-panel-en" style="display:none;">
-          <img src="assets/images/z6918537879453_4a2bd9b6e7ed998fc064e5000d3c1bb8.jpg" alt="Price list (English)" id="price-image-en" class="price-image-en" aria-hidden="true" />
-        </div>
-        <div id="price-panel-vi" class="price-panel price-panel-vi" style="display:none;">
-          <!-- Desktop Vietnamese price image -->
-          <img src="assets/images/banggia-ngang-01.png" alt="Bảng giá (Tiếng Việt)" id="price-image-vi-desktop" class="price-image-vi d-none d-md-block" aria-hidden="true" />
-          <!-- Mobile Vietnamese price images -->
-          <div id="price-mobile-vi" class="d-block d-md-none">
-            <img src="assets/images/price_mobile_1.png" alt="Bảng giá di động 1 (Tiếng Việt)" class="price-image-vi" />
-            <img src="assets/images/price_mobile_2.png" alt="Bảng giá di động 2 (Tiếng Việt)" class="price-image-vi" />
-            <img src="assets/images/price_mobile_3.png" alt="Bảng giá di động 3 (Tiếng Việt)" class="price-image-vi" />
+      <div class="menu-tab-content active" id="cut">
+        <!-- 1. CUT & STYLE -->
+        <div class="menu-category">
+          <div class="category-title">
+            CẮT TÓC & TẠO KIỂU
+            <span class="category-note">Cut & Style</span>
           </div>
-        </div>
-    </div>
-  </section>
-
-
-
-  <div class="band-black"><div class="container"><div class="h5 m-0" data-i18n="brands.tit">Size Chart</div></div></div>
-  <section id="size-chart" class="section p-0">
-    <div class="container-fluid p-0 size-wrap" style="min-height:0px;">
-      <!-- Language-specific size chart images: show only the active language image -->
-        <div id="size-panel-en" class="size-panel size-panel-en" style="display:none;">
-          <img src="assets/images/hair-size-en.png" alt="Size chart (English)" id="size-image-en" class="size-image-en" aria-hidden="true" />
-        </div>
-        <div id="size-panel-vi" class="size-panel size-panel-vi" style="display:none;">
-          <img src="assets/images/hair-size-vn.png" alt="Bảng size (Tiếng Việt)" id="size-image-vi" class="size-image-vi" aria-hidden="true" />
-        </div>
-    </div>
-  </section>
-
-
-   <!-- Black separator bar between hero and content -->
-  <div class="band-black"><div class="container"><div class="h5 m-0">Where To Find Us!</div></div></div>
-  <!-- Footer -->
-  <footer id="footer" class="py-4 border-top">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-6">
-          <div class="d-flex flex-column h-100 justify-content-center">
-            <h2 class="h2 mb-4" data-i18n="contact.title">Ju Hair Studio</h2>
-            <p class="text-muted fs-5 mb-4" data-i18n="contact.subtitle">We are in the city center with easy parking.</p>
-            <p class="text-muted fs-5 mb-4">Open - Close: 9:30 - 20:30</p>
-            <div class="d-flex flex-column gap-3">
-              <a
-    href="https://www.facebook.com/juhair0923322333?mibextid=uzlsIk"
-    target="_blank"
-    rel="nofollow"
-    class="btn btn-accent text-white py-2 fs-5"
-    id="zFwQon"
-  >Booking</a>
-
-              <div class="fs-5.5"><i class="bi bi-geo-alt me-3"></i><span id="address">317 Lý Tự Trọng, Phường Bến Thành, Quận 1, Hồ Chí Minh, Vietnam</span></div>
-              <div class="fs-5.5"><i class="bi bi-telephone me-3"></i><a id="hotline" href="tel:0985678988">0985678988</a></div>
-              <div class="d-flex gap-4 mt-3 align-items-center">
-                <a id="map-link" class="link-primary fs-4.5" target="_blank" rel="noopener" href="https://maps.google.com/?q=317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam"><i class="bi bi-map me-2"></i><span data-i18n="contact.openMap">Open in Google Maps</span></a>
-                <a id="facebook-link" class="link-primary fs-5" href="https://www.facebook.com/juhair0923322333?mibextid=uzlsIk" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <div class="menu-grid">
+            <div class="menu-item-group full-width">
+              <h4 class="mb-3">Cắt Tóc (Haircut)</h4>
+              <!-- Haircut Table Header -->
+              <div class="menu-item item-header-row">
+                <div class="item-header">
+                  <span class="item-name">Dịch vụ</span>
+                  <span class="item-price text-end">Ju (Top Stylist) / Stylist</span>
+                </div>
               </div>
-              <div class="fs-5.5">© <span id="year"></span> <span data-i18n="brand">JU HAIR SALON</span></div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Cắt Mái</span>
+                  <span class="item-price">100k / 100k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Cắt Nam</span>
+                  <span class="item-price">250k / 200k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Cắt Nữ</span>
+                  <span class="item-price">350k / 300k</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-item-group">
+              <h4 class="mb-3">Gội & Massage</h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Dầu Hàn Quốc</span>
+                  <span class="item-price">350k / 400k</span>
+                </div>
+                <div class="item-desc">Thường / Tẩy, Nối</div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Dầu USA</span>
+                  <span class="item-price">400k / 450k</span>
+                </div>
+                <div class="item-desc">Moroccanoil, Kevin Murphy (Thường / Tẩy, Nối)</div>
+              </div>
+            </div>
+
+            <div class="menu-item-group">
+              <h4 class="mb-3">Tạo Kiểu (Styling)</h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Sấy Tạo Kiểu</span>
+                  <span class="item-price">100k / 150k</span>
+                </div>
+                <div class="item-desc">Cơ bản / Sự kiện</div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-6">
-          <div class="ratio ratio-4x3 rounded-3 overflow-hidden shadow-sm">
-            <!-- Replace src with your embed placeid -->
-            <iframe id="map-embed" src="https://www.google.com/maps?q=317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="menu-tab-content" id="perm">
+        <!-- 2. PERM & STRAIGHTENING -->
+        <div class="menu-category">
+          <div class="category-title">
+            UỐN & DUỖI
+            <span class="category-note">Perm & Straightening</span>
+          </div>
+
+          <div class="menu-grid">
+            <!-- Uốn nếp -->
+            <div class="menu-item-group">
+              <h4 class="mb-3">Uốn Nếp (Nam/Nữ)</h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Ép Side (Nam)</span>
+                  <span class="item-price">600k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Uốn Thiết Kế (Nam)</span>
+                  <span class="item-price">800k - 1.000k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Uốn Mái</span>
+                  <span class="item-price">500k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Uốn Phồng / Bấm Chân Tóc</span>
+                  <span class="item-price">600k - 800k</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Uốn thiết kế -->
+            <div class="menu-item-group">
+              <h4 class="mb-3">Uốn Thiết Kế <small class="text-muted text-sm">(Size S/M/L/XL)</small></h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Uốn C</span>
+                  <span class="item-price">1.000k <span class="price-sizes">/ 1.200k / 1.400k / 1.600k</span></span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Uốn Bung (Lơi Hàn Quốc)</span>
+                  <span class="item-price">1.200k <span class="price-sizes">/ 1.400k / 1.600k / 1.800k</span></span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Uốn Xoăn (Sát Chân Tóc)</span>
+                  <span class="item-price">1.400k <span class="price-sizes">/ 1.600k / 1.800k / 2.000k</span></span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Uốn Hippi (Xù - Mì)</span>
+                  <span class="item-price">- <span class="price-sizes">/ 1.800k / 2.200k / 2.600k</span></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add-ons Uốn -->
+            <div class="menu-item-group">
+              <h4 class="mb-3">Add-ons Uốn <small class="text-muted text-sm">(Size S/M/L/XL)</small></h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Uốn Phục Hồi Keratin</span>
+                  <span class="item-price">+200k <span class="price-sizes">/ +400k / +600k / +800k</span></span>
+                </div>
+                <div class="item-desc">Phù hợp tóc tẩy nát, yếu</div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Uốn Thuần Chay</span>
+                  <span class="item-price">+200k <span class="price-sizes">/ +400k / +600k / +800k</span></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ép duỗi -->
+            <div class="menu-item-group">
+              <h4 class="mb-3">Ép Duỗi Tóc <small class="text-muted text-sm">(Size S/M/L/XL)</small></h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Duỗi Tự Nhiên</span>
+                  <span class="item-price">1.000k <span class="price-sizes">/ 1.200k / 1.400k / 1.600k /
+                      1.800k</span></span>
+                </div>
+                <div class="item-desc">Chân Tóc / Size S / M / L / XL</div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Duỗi Cúp Phồng</span>
+                  <span class="item-price">- <span class="price-sizes">/ 1.400k / 1.600k / 1.800k / 2.000k</span></span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Duỗi Thân + Uốn Ngọn</span>
+                  <span class="item-price">1.600k <span class="price-sizes">/ 1.800k / 2.200k / 2.400k</span></span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Duỗi Phục Hồi Keratin</span>
+                  <span class="item-price">+200k <span class="price-sizes">/ +400k / +600k / +800k</span></span>
+                </div>
+                <div class="item-desc">Phù hợp tóc yếu, hư tổn</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="menu-tab-content" id="dye">
+        <!-- 3. COLOR & BLEACH -->
+        <div class="menu-category">
+          <div class="category-title">
+            NHUỘM & TẨY
+            <span class="category-note">Dye & Bleach</span>
+          </div>
+
+          <div class="menu-grid">
+            <!-- Nhuộm màu -->
+            <div class="menu-item-group">
+              <h4 class="mb-3">Nhuộm Màu Thời Trang <small class="text-muted text-sm">(Size S/M/L/XL)</small></h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Hãng Màu Italy</span>
+                  <span class="item-price">800k / 1.000k / 1.200k / 1.400k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Hãng Màu Japan</span>
+                  <span class="item-price">1.200k / 1.400k / 1.600k / 1.800k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Hãng Màu USA</span>
+                  <span class="item-price">1.600k / 1.800k / 2.000k / 2.200k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Nhuộm Hạ Tone</span>
+                  <span class="item-price">- <span class="price-sizes">/ +400k / +600k / +800k</span></span>
+                </div>
+                <div class="item-desc">Tóc sáng màu, đã tẩy</div>
+              </div>
+            </div>
+
+            <!-- Other Dye Services -->
+            <div class="menu-item-group">
+              <h4 class="mb-3">Dịch Vụ Khác <small class="text-muted text-sm">(Size S/M/L/XL)</small></h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Nâng Tone / Rửa Màu</span>
+                  <span class="item-price">600k / 800k / 1.000k / 1.200k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Bóc Màu Kim Loại</span>
+                  <span class="item-price">800k / 1.000k / 1.200k / 1.400k</span>
+                </div>
+              </div>
+              <h4 class="mb-3 mt-4">Root Services</h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Nhuộm Chân Tóc</span>
+                  <span class="item-price">800k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Chân Tóc Bạc Màu Thời Trang</span>
+                  <span class="item-price">1.000k</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tẩy Tóc -->
+            <div class="menu-item-group">
+              <h4 class="mb-3">Tẩy Tóc <small class="text-muted text-sm">(Size S/M/L/XL)</small></h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Tẩy 1 Lần</span>
+                  <span class="item-price">1.200k / 1.400k / 1.600k / 1.800k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Tẩy 2 Lần</span>
+                  <span class="item-price">1.800k / 2.200k / 2.600k / 2.800k</span>
+                </div>
+              </div>
+              <h4 class="mb-3 mt-4">Tẩy Nối Chân</h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">1 Lần / 2 Lần</span>
+                  <span class="item-price">1.400k / 2.000k</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Nam -->
+            <div class="menu-item-group">
+              <h4 class="mb-3">Dành Cho Nam <small class="text-muted text-sm">(Size S/M/L)</small></h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Nhuộm Nam (Size S/M/L)</span>
+                  <span class="item-price">800k / 1.000k / 1.200k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Tẩy Nam 1 Lần</span>
+                  <span class="item-price">800k / 900k / 1.000k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Tẩy Nam 2 Lần</span>
+                  <span class="item-price">1.200k / 1.400k / 1.600k</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Highlight & Design -->
+            <div class="menu-item-group">
+              <h4 class="mb-3">Nhuộm Thiết Kế & Highlight <small class="text-muted text-sm">(Size S/M/L/XL)</small></h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Balayage / Ombre / Airtouch</span>
+                  <span class="item-price">4.200k / 5.200k / 6.200k</span>
+                </div>
+                <div class="item-desc">Size M / L / XL</div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Hidden Highlight</span>
+                  <span class="item-price">- <span class="price-sizes">/ 1.200k / 1.400k / 1.600k</span></span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Highlight 1/4</span>
+                  <span class="item-price">1.000k / 1.400k / 1.600k / 2.000k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Highlight 1/2</span>
+                  <span class="item-price">1.200k / 1.600k / 1.800k / 2.400k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Highlight Full</span>
+                  <span class="item-price">1.400k / 1.800k / 2.200k / 2.800k</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-tab-content" id="recovery">
+        <!-- 4. RECOVERY & TREATMENT -->
+        <div class="menu-category">
+          <div class="category-title">
+            PHỤC HỒI & CHỮA TRỊ
+            <span class="category-note">Recovery & Treatment</span>
+          </div>
+          <div class="menu-grid">
+            <div class="menu-item-group full-width">
+              <h4 class="mb-3">Liệu Trình Chuyên Sâu</h4>
+              <div class="table-responsive">
+                <table class="price-table">
+                  <thead>
+                    <tr>
+                      <th>Dịch vụ</th>
+                      <th>Size S</th>
+                      <th>Size M</th>
+                      <th>Size L</th>
+                      <th>Size XL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Bọc Keratin</td>
+                      <td>1.000k</td>
+                      <td>1.400k</td>
+                      <td>1.800k</td>
+                      <td>2.200k</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="menu-item-group mt-4">
+              <h4 class="mb-3">Liệu Trình Đơn</h4>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Hấp Phục Hồi</span>
+                  <span class="item-price">400k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Nén Collagen</span>
+                  <span class="item-price">500k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Nén Keratin</span>
+                  <span class="item-price">800k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Gội Detox Da Đầu</span>
+                  <span class="item-price">300k</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="item-header">
+                  <span class="item-name">Gội Detox Trị Gầu / Rụng</span>
+                  <span class="item-price">350k</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="menu-section" style="background-color: #fff;">
+    <div class="container">
+      <h2 class="section-title">Thư Viện Ảnh</h2>
+      <p class="section-subtitle">Khách hàng của Ju Hair Salon</p>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="assets/images/Gallery/1.5.jpg" alt="Gallery 1"></div>
+        <div class="gallery-item"><img src="assets/images/Gallery/2.jpg" alt="Gallery 2"></div>
+        <div class="gallery-item"><img src="assets/images/Gallery/1.2.jpg" alt="Gallery 3"></div>
+        <div class="gallery-item"><img src="assets/images/Gallery/1.4.jpg" alt="Gallery 4"></div>
+        <div class="gallery-item"><img src="assets/images/Gallery/1.3.jpg" alt="Gallery 5"></div>
+        <div class="gallery-item"><img src="assets/images/Gallery/1.6.jpg" alt="Gallery 6"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="footer">
+    <div class="container footer-content">
+      <div class="footer-info">
+        <h3>Ju Hair Salon</h3>
+        <ul class="contact-list">
+          <li>
+            <i class="bi bi-geo-alt-fill"></i>
+            <span>317 Lý Tự Trọng, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh</span>
+          </li>
+          <li>
+            <i class="bi bi-clock-fill"></i>
+            <span>9:30 - 20:30 (Mở cửa tất cả các ngày)</span>
+          </li>
+          <li>
+            <i class="bi bi-telephone-fill"></i>
+            <a href="tel:0978989317">097 8989 317</a>
+          </li>
+        </ul>
+        <div class="socials">
+          <a href="https://www.facebook.com/juhair0923322333" target="_blank" class="social-link"><i
+              class="bi bi-facebook"></i></a>
+          <a href="https://instagram.com/ju.hairsalon" target="_blank" class="social-link"><i
+              class="bi bi-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-map">
+        <iframe id="map-embed"
+          src="https://www.google.com/maps?q=317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam&output=embed"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+    <div class="container text-center pt-4"
+      style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem; color: rgba(255,255,255,0.5); font-size: 0.8rem;">
+      &copy; <span id="year">2026</span> Ju Hair Salon. All rights reserved.
     </div>
   </footer>
 
-  <!-- Booking flow moved to Facebook; modal removed -->
-
-  <!-- CONFIG + DATA + I18N + RENDERING (vanilla JS) -->
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
   <script>
-    // ====== CONFIG ======
-    const CONFIG = {
-      LANGUAGE_DEFAULT: 'en', // 'en' or 'vi'
-      USE_PRICE_IMAGE: true,   // true => show image instead of table (image shown by default)
-      HOTLINE: '0985678988',
-      ADDRESS: '317 Lý Tự Trọng, Phường Bến Thành, Quận 1, Hồ Chí Minh, Vietnam',
-      MAP_QUERY: '317+Ly+Tu+Trong,+Ben+Thanh,+Quan+1,+Ho+Chi+Minh,+Vietnam',
-      BOOKING_EMAIL: 'booking@example.com', // used for mailto fallback
-      FACEBOOK_URL: 'https://www.facebook.com/juhair0923322333?mibextid=uzlsIk',
-    };
-
-    // ====== SAMPLE CONTENT DATA ======
-    const GALLERY = [
-      'assets/images/Gallery/1.5.jpg',
-      'assets/images/Gallery/2.jpg',
-      'assets/images/Gallery/1.2.jpg',
-      'assets/images/Gallery/1.4.jpg',
-      'assets/images/Gallery/1.3.jpg',
-      'assets/images/Gallery/1.6.jpg'
-    ];
-
-    const BRANDS = [
-      'assets/images/brand/1.jpg',
-      'assets/images/brand/2.jpg',
-      'assets/images/brand/3.jpg',
-      'assets/images/brand/4.jpg',
-      'assets/images/brand/5.jpg',
-    ];
-
-    const INSTAGRAM = { HANDLE: 'ju.hairsalon', URL: 'https://instagram.com/ju.hairsalon' };
-
-    const INSTAGRAM_POSTS = [
-      { href: 'https://www.instagram.com/p/POST1/', src: 'https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?q=80&w=800&auto=format&fit=crop' },
-      { href: 'https://www.instagram.com/p/POST2/', src: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop' },
-      { href: 'https://www.instagram.com/p/POST3/', src: 'https://images.unsplash.com/photo-1510414696678-2415ad8474aa?q=80&w=800&auto=format&fit=crop' },
-      { href: 'https://www.instagram.com/p/POST4/', src: 'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=800&auto=format&fit=crop' },
-      { href: 'https://www.instagram.com/p/POST5/', src: 'https://images.unsplash.com/photo-1516880711640-ef7db81be3e6?q=80&w=800&auto=format&fit=crop' },
-      { href: 'https://www.instagram.com/p/POST6/', src: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop' },
-      { href: 'https://www.instagram.com/p/POST7/', src: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop' },
-      { href: 'https://www.instagram.com/p/POST8/', src: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop' },
-      { href: 'https://www.instagram.com/p/POST9/', src: 'https://images.unsplash.com/photo-1510414696678-2415ad8474aa?q=80&w=800&auto=format&fit=crop' },
-      { href: 'https://www.instagram.com/p/POST10/', src: 'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=800&auto=format&fit=crop' },
-      { href: 'https://www.instagram.com/p/POST11/', src: 'https://images.unsplash.com/photo-1516880711640-ef7db81be3e6?q=80&w=800&auto=format&fit=crop' },
-      { href: 'https://www.instagram.com/p/POST12/', src: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop' }
-    ];
-
-    const PRICE_DATA = [
-      { key: 'services.cut', en: 'Cut', vi: 'Cắt tóc', price: '200K–350K' },
-      { key: 'services.color', en: 'Color', vi: 'Nhuộm', price: '700K–1.5M' },
-      { key: 'services.perm', en: 'Perm', vi: 'Uốn', price: '900K–1.8M' },
-      { key: 'services.treatment', en: 'Treatment', vi: 'Phục hồi', price: '400K–900K' }
-    ];
-
-    const POPULAR = { en: ['Cut + Treatment', 'Color + Treatment', 'Perm + Cut'], vi: ['Cắt + Phục hồi', 'Nhuộm + Phục hồi', 'Uốn + Cắt'] };
-
-    // ====== I18N STRINGS ======
-    const I18N = {
-      en: {
-        brand: 'JU HAIR SALON',
-        'nav.home': 'Home',
-        'nav.prices': 'Prices',
-        'nav.contact': 'Contact',
-        'cta.book': 'Book',
-        'cta.bookFull': 'Book an appointment',
-        'cta.viewPrices': 'View prices',
-        'cta.bookNow': 'Book now',
-        'hero.eyebrow': 'Our Studio',
-        'hero.title': 'Ju Hair',
-        'hero.kicker': 'Salon & Studio',
-        'hero.addr1': '317 Lý Tự Trọng, Phường Bến Thành, Quận 1,',
-        'hero.addr2': 'Ho Chi Minh City',
-        'gallery.title': 'Gallery',
-        'brands.title': 'Price List',
-        'brands.titles': 'Our Trusted Brand Partners',
-        'brands.tit': 'Size Chart',
-        'social.follow': 'Follow us at Instagram!',
-        'insta.subtitle': 'We regularly update our hairstyles and news on our official Instagram channel.',
-        'prices.title': 'Our Prices',
-        'prices.note': 'Transparent, simple tiers. Student discount on weekdays.',
-        'prices.service': 'Service',
-        'prices.price': 'Price',
-        'prices.popular': 'Popular Packages',
-        'contact.title': 'Ju Hair Salon',
-        'contact.blackbar': 'Find Us Here!',
-        'contact.subtitle': 'Ben Thanh, District 1',
-        'contact.openMap': 'Open in Google Maps',
-        'booking.title': 'Book an appointment',
-        'booking.name': 'Full name',
-        'booking.date': 'Date',
-        'booking.time': 'Time',
-        'booking.service': 'Service',
-        'booking.phone': 'Phone',
-        'booking.notes': 'Notes',
-        'booking.call': 'Call hotline',
-        'booking.cancel': 'Cancel',
-        'booking.submit': 'Send request',
-        'services.cut': 'Cut',
-        'services.color': 'Color',
-        'services.perm': 'Perm',
-        'services.treatment': 'Treatment'
-      },
-      vi: {
-        brand: 'JU HAIR SALON',
-        'nav.home': 'Trang chủ',
-        'nav.prices': 'Bảng giá',
-        'nav.contact': 'Liên hệ',
-        'cta.book': 'Đặt lịch',
-        'cta.bookFull': 'Đặt lịch hẹn',
-        'cta.viewPrices': 'Xem giá',
-        'cta.bookNow': 'Đặt ngay',
-        'hero.eyebrow': 'Studio của chúng tôi',
-        'hero.title': 'Ju Hair',
-        'hero.kicker': 'Salon & Studio',
-        'hero.addr1': '317 Lý Tự Trọng, Phường Bến Thành, Quận 1,',
-        'hero.addr2': 'TP. Hồ Chí Minh, Việt Nam',
-        'gallery.title': 'Gallery',
-        'brands.title': 'Bảng Giá',
-        'brands.titles': 'Đối tác thương hiệu đáng tin cậy',
-        'brands.tit': 'Bảng Size Tóc',
-        'social.follow': 'Theo dõi chúng tôi trên Instagram!',
-        'insta.subtitle': 'Chúng tôi thường xuyên cập nhật kiểu tóc và tin mới trên kênh Instagram chính thức.',
-        'prices.title': 'Bảng giá',
-        'prices.note': 'Minh bạch, dễ hiểu. Giảm giá sinh viên các ngày trong tuần.',
-        'prices.service': 'Dịch vụ',
-        'prices.price': 'Giá',
-        'prices.popular': 'Gói nổi bật',
-        'contact.title': 'Ju Hair Salon',
-        'contact.blackbar': 'Find Us Here!',
-        'contact.subtitle': 'Bến Thành, Quận 1.',
-        'contact.openMap': 'Mở Google Maps',
-        'booking.title': 'Đặt lịch hẹn',
-        'booking.name': 'Họ và tên',
-        'booking.date': 'Ngày',
-        'booking.time': 'Giờ',
-        'booking.service': 'Dịch vụ',
-        'booking.phone': 'Số điện thoại',
-        'booking.notes': 'Ghi chú',
-        'booking.call': 'Gọi hotline',
-        'booking.cancel': 'Hủy',
-        'booking.submit': 'Gửi yêu cầu',
-        'services.cut': 'Cắt tóc',
-        'services.color': 'Nhuộm',
-        'services.perm': 'Uốn',
-        'services.treatment': 'Phục hồi'
-      }
-    };
-
-    // ====== RENDER HELPERS ======
-    function applyLanguage(lang){
-      document.documentElement.setAttribute('lang', lang);
-      document.body.setAttribute('data-language', lang);
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if(I18N[lang] && I18N[lang][key]) el.textContent = I18N[lang][key];
-      });
-      // Price rows re-render for names
-  renderPrices(lang);
-  // Update language-specific price images
-  if (typeof updatePriceImages === 'function') updatePriceImages(lang);
-  if (typeof updateSizeImages === 'function') updateSizeImages(lang);
-  // Update hero flag to match language (if present)
-  try{
-    const heroFlag = document.getElementById('hero-flag');
-    if(heroFlag){
-      if(lang === 'vi'){
-        heroFlag.src = 'https://flagcdn.com/vn.svg';
-        heroFlag.alt = 'Tiếng Việt';
-        heroFlag.title = 'Tiếng Việt';
-      } else {
-        heroFlag.src = 'https://flagcdn.com/vn.svg';
-        heroFlag.alt = 'English';
-        heroFlag.title = 'English';
-      }
-    }
-  }catch(e){ /* ignore */ }
-    }
-
-    function renderGallery(){
-      document.querySelectorAll('.gallery-container').forEach(container => {
-        container.innerHTML = '';
-        GALLERY.forEach((src, idx) => {
-          const item = document.createElement('div');
-          item.className = 'gallery-item';
-          item.innerHTML = `
-            <a href="${src}" target="_blank" rel="noopener" class="d-block">
-              <img class="gallery-img" src="${src}" alt="Gallery image ${idx+1}" />
-            </a>`;
-          container.appendChild(item);
-        });
-      });
-    }
-
-    function renderBrandCarousel(){
-      const slides = document.getElementById('brand-slides');
-      const indicators = document.getElementById('brand-indicators');
-      if(!slides || !indicators) return;
-      slides.innerHTML = '';
-      indicators.innerHTML = '';
-      BRANDS.forEach((src, idx)=>{
-        const item = document.createElement('div');
-        item.className = 'carousel-item' + (idx===0 ? ' active' : '');
-        item.innerHTML = `<img src="${src}" class="d-block w-100" alt="Brand slide ${idx+1}">`;
-        slides.appendChild(item);
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.setAttribute('data-bs-target','#brandCarousel');
-        dot.setAttribute('data-bs-slide-to', String(idx));
-        if(idx===0) dot.classList.add('active');
-        indicators.appendChild(dot);
-      });
-    }
-
-    function renderInstagramFeed(){
-      const grid = document.getElementById('ig-grid');
-      if(!grid) return;
-      grid.innerHTML = '';
-      INSTAGRAM_POSTS.forEach((post, i) => {
-        const a = document.createElement('a');
-        a.className = 'ig-card ratio ratio-1x1';
-        a.href = (post.href || (INSTAGRAM.URL || '#'));
-        a.target = '_blank';
-        a.rel = 'noopener';
-        a.innerHTML = `<img src="${post.src}" alt="${post.alt || ('Instagram post ' + (i+1))}">`;
-        grid.appendChild(a);
-      });
-      const handleLink = document.getElementById('ig-handle-link');
-      if(handleLink){ handleLink.href = INSTAGRAM.URL; handleLink.textContent = '@' + (INSTAGRAM.HANDLE || '').toUpperCase(); }
-    }
-
-    function renderPrices(lang){
-      const priceTable = document.getElementById('price-table');
-      const priceImgWrap = document.getElementById('price-image-wrap');
-      // Defensive: some markup variants use a single image element (id="price-image")
-      // while older code expects wrappers (#price-image-wrap / #price-table). Avoid
-      // throwing when elements are missing so language switching still works.
-      if (CONFIG.USE_PRICE_IMAGE) {
-        if (priceTable && priceTable.classList) priceTable.classList.add('d-none');
-        if (priceImgWrap && priceImgWrap.classList) priceImgWrap.classList.remove('d-none');
-      } else {
-        if (priceTable && priceTable.classList) priceTable.classList.remove('d-none');
-        if (priceImgWrap && priceImgWrap.classList) priceImgWrap.classList.add('d-none');
-        const rows = document.getElementById('price-rows');
-        if (rows) {
-          rows.innerHTML = '';
-          PRICE_DATA.forEach(item => {
-            const tr = document.createElement('tr');
-            const name = (lang === 'vi') ? item.vi : item.en;
-            tr.innerHTML = `<td>${name}</td><td class="text-end">${item.price}</td>`;
-            rows.appendChild(tr);
-          });
-        }
-        // Popular list
-        const list = document.getElementById('popular-list');
-        if (list) {
-          list.innerHTML = '';
-          (POPULAR[lang] || POPULAR.en).forEach(p => {
-            const li = document.createElement('li');
-            li.textContent = p;
-            list.appendChild(li);
-          });
-        }
-      }
-    }
-
-    // Show/hide the per-language price panels (panel includes background + image)
-    function updatePriceImages(lang){
-      try{
-        const panelEn = document.getElementById('price-panel-en');
-        const panelVi = document.getElementById('price-panel-vi');
-        const imgEn = document.getElementById('price-image-en');
-        const imgViDesktop = document.getElementById('price-image-vi-desktop');
-        const mobileViContainer = document.getElementById('price-mobile-vi');
-        
-        if(lang === 'vi'){
-          if(panelEn) panelEn.style.display = 'none';
-          if(panelVi) panelVi.style.display = 'flex';
-          if(imgEn) imgEn.setAttribute('aria-hidden','true');
-          if(imgViDesktop) imgViDesktop.setAttribute('aria-hidden','false');
-          if(mobileViContainer) {
-            const mobileImgs = mobileViContainer.querySelectorAll('img');
-            mobileImgs.forEach(img => img.setAttribute('aria-hidden','false'));
-          }
-        } else {
-          if(panelVi) panelVi.style.display = 'none';
-          if(panelEn) panelEn.style.display = 'flex';
-          if(imgViDesktop) imgViDesktop.setAttribute('aria-hidden','true');
-          if(mobileViContainer) {
-            const mobileImgs = mobileViContainer.querySelectorAll('img');
-            mobileImgs.forEach(img => img.setAttribute('aria-hidden','true'));
-          }
-          if(imgEn) imgEn.setAttribute('aria-hidden','false');
-        }
-      }catch(e){ console.warn('updatePriceImages failed', e); }
-    }
-
-    // Show/hide the per-language size chart panels (mirrors price panels)
-    function updateSizeImages(lang){
-      try{
-        const panelEn = document.getElementById('size-panel-en');
-        const panelVi = document.getElementById('size-panel-vi');
-        const imgEn = document.getElementById('size-image-en');
-        const imgVi = document.getElementById('size-image-vi');
-        if(lang === 'vi'){
-          if(panelEn) panelEn.style.display = 'none';
-          if(panelVi) panelVi.style.display = 'flex';
-          if(imgEn) imgEn.setAttribute('aria-hidden','true');
-          if(imgVi) imgVi.setAttribute('aria-hidden','false');
-        } else {
-          if(panelVi) panelVi.style.display = 'none';
-          if(panelEn) panelEn.style.display = 'flex';
-          if(imgVi) imgVi.setAttribute('aria-hidden','true');
-          if(imgEn) imgEn.setAttribute('aria-hidden','false');
-        }
-      }catch(e){ console.warn('updateSizeImages failed', e); }
-    }
-
-    function initBasics(){
-  // Address + hotline fill everywhere — guard missing elements so runtime doesn't crash
-  const telHref = 'tel:' + CONFIG.HOTLINE.split(' ').join('');
-  const hotlineEl = document.getElementById('hotline');
-  if (hotlineEl) { hotlineEl.href = telHref; hotlineEl.textContent = CONFIG.HOTLINE; }
-  const hotlineFooter = document.getElementById('hotline-footer');
-  if (hotlineFooter) { hotlineFooter.href = telHref; hotlineFooter.textContent = CONFIG.HOTLINE; }
-  const callHotline = document.getElementById('call-hotline');
-  if (callHotline) callHotline.href = telHref;
-  const addressEl = document.getElementById('address');
-  if (addressEl) addressEl.textContent = CONFIG.ADDRESS;
-  const addressFooter = document.getElementById('address-footer');
-  if (addressFooter) addressFooter.textContent = CONFIG.ADDRESS;
-  var mapUrl = 'https://maps.google.com/?q=' + CONFIG.MAP_QUERY;
-  const mapLink = document.getElementById('map-link');
-  if (mapLink) mapLink.href = mapUrl;
-  const mapFooter = document.getElementById('map-footer');
-  if (mapFooter) mapFooter.href = mapUrl;
-  const mapEmbed = document.getElementById('map-embed');
-  if (mapEmbed) mapEmbed.src = 'https://www.google.com/maps?q=' + CONFIG.MAP_QUERY + '&output=embed';
-  var fb = document.getElementById('facebook-link');
-  if (fb && CONFIG.FACEBOOK_URL){ fb.href = CONFIG.FACEBOOK_URL; fb.target = '_blank'; fb.rel = 'noopener'; }
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-    }
-
-    function initLanguage(){
-      try {
-        const saved = localStorage.getItem('siteLang');
-        const startLang = saved || ((navigator.language || '').startsWith('vi') ? 'vi' : CONFIG.LANGUAGE_DEFAULT);
-        const btns = Array.from(document.querySelectorAll('.lang-flags [data-lang]'));
-        if(!btns.length) return; // no language buttons present
-        const setActive = (lang)=> btns.forEach(b=> b.classList.toggle('active', (b.dataset && b.dataset.lang) ? b.dataset.lang === lang : b.getAttribute('data-lang') === lang));
-        const setLang = (lang)=>{
-          try{
-            applyLanguage(lang);
-            setActive(lang);
-            localStorage.setItem('siteLang', lang);
-            document.documentElement.setAttribute('lang', lang);
-            document.body.setAttribute('data-language', lang);
-          }catch(err){ console.warn('setLang error', err); }
-        };
-        setLang(startLang);
-        btns.forEach(btn=> btn.addEventListener('click', (e)=>{ e.preventDefault(); const lang = (btn.dataset && btn.dataset.lang) ? btn.dataset.lang : btn.getAttribute('data-lang'); setLang(lang); }));
-      } catch(ex){ console.error('initLanguage failed', ex); }
-    }
-
-    function initBooking(){
-      // Booking UI is optional (moved to Facebook). Guard missing elements to avoid runtime errors.
-      const submitBtn = document.getElementById('submit-booking');
-      if(!submitBtn) return;
-      submitBtn.addEventListener('click', () => {
-        const form = document.getElementById('booking-form');
-        if(!form || !form.checkValidity()) { form && form.reportValidity && form.reportValidity(); return; }
-        const data = Object.fromEntries(new FormData(form).entries());
-        // mailto fallback string
-        const subject = encodeURIComponent('Booking request');
-        const body = encodeURIComponent(`Name: ${data.name}\nPhone: ${data.phone}\nDate: ${data.date}\nTime: ${data.time}\nService: ${data.service}\nNotes: ${data.notes || ''}`);
-        window.location.href = `mailto:${CONFIG.BOOKING_EMAIL}?subject=${subject}&body=${body}`;
-      });
-    }
-
-    // Init all
-    document.addEventListener('DOMContentLoaded', () => {
-      initBasics();
-      renderGallery();
-      renderBrandCarousel();
-      renderInstagramFeed();
-      initLanguage();
-      renderPrices(document.body.getAttribute('data-language'));
-      initBooking();
-      // Activate nav link by hash
-      const links = document.querySelectorAll('.nav-link');
-      function setActive(){
-        const hash = window.location.hash || '#home';
-        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === hash));
-      }
-      setActive();
-      window.addEventListener('hashchange', setActive);
-    });
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-
-  <!-- Bootstrap JS bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
