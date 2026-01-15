@@ -334,6 +334,54 @@ ul {
   font-weight: 400;
 }
 
+/* Price Grid Layout */
+.price-grid-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.price-grid-row.header {
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+
+.price-values {
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  gap: 0;
+  text-align: right;
+}
+
+.price-values span {
+  display: block;
+}
+
+.item-name-col {
+  display: flex;
+  align-items: center;
+}
+
+.price-grid-row.sub-item {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.price-grid-row.sub-item .item-name-col {
+  padding-left: 1rem;
+}
+
+@media (max-width: 768px) {
+  .price-values {
+    grid-template-columns: repeat(4, 60px);
+  }
+}
+
 .item-name {
   font-family: var(--font-serif);
   font-size: 1.2rem;
