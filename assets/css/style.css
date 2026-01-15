@@ -354,7 +354,7 @@ ul {
   display: grid;
   grid-template-columns: repeat(4, 70px);
   gap: 0;
-  text-align: right;
+  text-align: center;
 }
 
 .price-values span {
