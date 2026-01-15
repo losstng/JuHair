@@ -276,6 +276,7 @@ ul {
 
 .menu-section {
   padding: var(--section-padding) 0;
+  overflow-x: hidden;
 }
 
 .menu-category {
@@ -661,6 +662,7 @@ ul {
   animation: fadeUp 0.6s ease-out;
   padding: 2rem;
   border-radius: 8px;
+  overflow-x: hidden;
 }
 
 #cut {
