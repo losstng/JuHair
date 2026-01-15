@@ -359,6 +359,10 @@ ul {
 
 .price-values span {
   display: block;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: var(--color-black);
+  font-size: 1rem;
 }
 
 .item-name-col {
