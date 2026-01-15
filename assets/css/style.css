@@ -754,3 +754,35 @@ ul {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+/* Mobile-specific table styles */
+@media (max-width: 768px) {
+  .price-table {
+    font-size: 0.85rem;
+    min-width: 400px;
+  }
+
+  .price-table th,
+  .price-table td {
+    padding: 0.5rem 0.4rem;
+    white-space: nowrap;
+  }
+
+  .price-table th {
+    font-size: 0.75rem;
+  }
+
+  .table-responsive {
+    margin: 0 -1rem;
+    padding: 0 1rem;
+    width: calc(100% + 2rem);
+  }
+
+  #recovery .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #recovery .menu-item-group.full-width {
+    width: 100%;
+  }
+}
