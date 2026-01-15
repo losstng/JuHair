@@ -319,6 +319,21 @@ ul {
   margin-bottom: 0.5rem;
 }
 
+.item-header.item-sub {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  margin-bottom: 0.3rem;
+  padding-left: 1rem;
+}
+
+.item-header.item-sub .item-name {
+  font-weight: 400;
+}
+
+.item-header.item-sub .item-price {
+  font-weight: 400;
+}
+
 .item-name {
   font-family: var(--font-serif);
   font-size: 1.2rem;
