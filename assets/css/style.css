@@ -343,14 +343,14 @@ ul {
   margin-bottom: 0.5rem;
 }
 
-.price-grid-row.header {
+.price-grid-row.grid-header {
   margin-bottom: 0.75rem;
   font-weight: 600;
   font-size: 0.9rem;
   color: var(--color-text-light);
 }
 
-.price-grid-row.header .price-values span:first-child {
+.price-grid-row.grid-header .price-values span:first-child {
   font-weight: 400;
   font-size: 0.8rem;
 }
